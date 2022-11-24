@@ -1,0 +1,21 @@
+.cardBody
+{
+    border-style: solid;
+    height:21rem;
+    width:30rem; 
+    margin-left:3rem; 
+    margin-right:3rem;
+    margin-top: 2rem;
+}
+.flex
+{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+#title
+{   height: fit-content;
+    text-align:center;
+    margin:10px;
+    font-size: 30px;
+}

@@ -5,7 +5,7 @@ import { PortDetailsCardComponent } from './port-details-card/port-details-card.
 
 const routes: Routes = [
   {
-    path:"port-activities", component: PortActivitesComponent
+    path:"port-activities/:id", component: PortActivitesComponent
   },
   {
     path:"port-card", component: PortDetailsCardComponent

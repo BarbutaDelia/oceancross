@@ -11,8 +11,10 @@ const routes: Routes = [
   {path:"add-cruise", component: AddCruiseComponent},
   {path:"card-cruise", component: CardCruiseComponent},
   {path:"cruise-details", component: CruiseComponent},
+  {path:"cruise-details/:id", component: CruiseComponent},
   {path:"cruise-port-card", component: CruisePortCardComponent},
   {path:"wishlist", component: WishlistComponent},
+  {path:"home", component: HomeComponent},
   {path:"", component: HomeComponent}
 ];
 

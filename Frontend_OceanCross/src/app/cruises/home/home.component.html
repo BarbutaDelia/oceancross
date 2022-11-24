@@ -1,3 +1,43 @@
-<p>home works!</p>
-<button mat-button color="primary">Primary</button>
-<button mat-raised-button color="warn" (click)="Click()">Login</button>  
+
+<div style="display:flex;justify-content:center; margin-bottom: 5rem;">
+    <div style="border:solid; width:calc(75%);">
+
+    </div>
+</div>
+
+<div>
+    <div style="display:flex;justify-content: center;margin: 100px;">
+        <div style="margin:40px;">
+            <h1 id="title" style="color:red;">OCEANCROSS</h1>
+            <h3>Cruise planner for everyone</h3>
+            <h4>Create an account or sign in to enjoy the full experience.</h4>
+            <!--daca nu exista un cookie-->
+            <div>
+                <button style="margin:0.5rem;"mat-raised-button color="warn" (click)="ClickLogin()">Login</button>
+                <button style="margin:0.5rem;"mat-raised-button color="warn" (click)="ClickSingUp()">Sign-up</button>
+            </div>
+        </div>
+
+        <div>
+            <img
+                src="https://www.travelandleisure.com/thmb/50JEIRr90LRY7O6Eyef_nitgbUg=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/rc-wonder-of-the-seas-sunset-aerial-LRGSTSHIP0422-8230b27121c3438b9984b9dc63877937.jpg" height="400px" width="670px">
+        </div>
+    </div>
+    <!--<button mat-button color="primary">Primary</button>-->
+
+    <div style="display:flex;justify-content:center; margin-bottom: 5rem;">
+        <div
+            style="display:flex; justify-content: space-around; flex-flow: row wrap; width:calc(75%);">
+            <div *ngFor="let item of cards">
+                <app-card-cruise title="{{item.title}}" endDate="{{item.endDate}}" startDate="{{item.startDate}}"
+                    id="{{item.id}}"enableView="1">
+                </app-card-cruise>
+            </div>
+        </div>
+    </div>
+    
+    <div style="display:flex;justify-content:center; margin-bottom: 5rem;">
+        <div style="border:solid; width:calc(75%);">
+        </div>
+    </div>
+</div>
