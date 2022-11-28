@@ -7,8 +7,7 @@ import { CruisesModule } from './cruises/cruises.module';
 import { PortsModule } from './ports/ports.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoreModule } from './core/core.module';
-
-
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,7 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     AuthModule,
     CruisesModule,
-    PortsModule
+    PortsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

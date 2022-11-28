@@ -1,0 +1,32 @@
+h1{
+    color:red;
+}
+
+.center {
+    text-align: center;
+}
+
+.wrapper{
+    margin:auto;
+    width:calc(75%);
+}
+
+table {
+    width: 100%;
+    
+}
+
+hr {
+    height:1px;
+    background-color: black;
+}
+
+.up{
+    margin-bottom: 50px;
+    margin-top: 25px;
+}
+
+.down{
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
