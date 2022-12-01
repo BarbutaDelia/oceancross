@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { CruisePortCardComponent } from './cruise-port-card/cruise-port-card.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { CruiseComponent } from './cruise/cruise.component';
 @NgModule({
   declarations: [
     AddCruiseComponent,
@@ -15,7 +16,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     HomeComponent,
     CardCruiseComponent,
     CruisePortCardComponent,
-    WishlistComponent
+    WishlistComponent,
+    CruiseComponent
     
   ],
   imports: [
