@@ -1,1 +1,41 @@
-<p>sign-up works!</p>
+<div style="display:flex;justify-content: left;margin: 100px;">
+    <div style="margin:20px">
+        <img src="\assets\image\Royal-Caribbean-Allure-of-the-Seas-576.jpg" height="400px" width="670px">
+    </div>
+    <div class="login-box" >
+        <h2>Sign Up</h2><br>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="user-box">
+                
+                <input id="name" type="text" formControlName="name" required>
+                <label for="name">
+                    Name
+                </label>
+            </div>
+
+            <div class="user-box">
+                
+                <input id="username" type="text" formControlName="username" required>
+                <label for="username">
+                    Username
+                </label>
+            </div>
+            
+            <div class="user-box">
+                <input id="password" type="password" formControlName="password" required>
+                <label for="password">
+                    Password
+                </label>
+            </div>
+            
+            <div class="user-box">
+                <input id="confirmpassword" type="password" formControlName="confirmpassword" required>
+                <label for="confirmpassword">
+                    Confirm Password
+                </label>
+            </div>
+
+            <button mat-raised-button color="warn" class="button" type="submit">Sign Up</button>
+        </form>
+    </div>
+</div>

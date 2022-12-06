@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup  } from '@angular/forms';
+
 
 @Component({
   selector: 'app-login',
@@ -7,15 +8,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
 
-  constructor(private router: Router) { }
+
+  constructor(
+      private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+  });
   }
-  Click()
-  {
-    this.router.navigateByUrl('/sign-up');
+  onSubmit(): void {
+    console.log('Your entered this values:', this.loginForm.value);
+    this.loginForm.reset();
   }
 
+  
 
 }
