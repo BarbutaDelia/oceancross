@@ -1,0 +1,16 @@
+
+p{
+    margin : 10px;
+}
+.activity-card {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+}
+.port-image {
+    width: 200px;
+    height: 200px;
+}
+.activity-card-details{
+    text-align: center;
+}

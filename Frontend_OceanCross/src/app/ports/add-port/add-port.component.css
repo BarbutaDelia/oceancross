@@ -1,0 +1,13 @@
+.title-port{
+    color: #f35334;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+}
+.add-port{
+    display: flexbox;
+    align-items: flex-start;
+}
+mat-form-field {
+    width: 100%;
+}

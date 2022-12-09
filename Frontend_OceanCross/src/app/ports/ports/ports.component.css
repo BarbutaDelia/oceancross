@@ -1,0 +1,7 @@
+.port{
+    display: flex;
+    align-content: space-between;
+}
+.port-comp{
+   padding-right: 150px;
+}

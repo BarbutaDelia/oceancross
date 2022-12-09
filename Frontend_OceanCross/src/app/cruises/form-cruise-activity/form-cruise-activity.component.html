@@ -1,0 +1,25 @@
+<div>
+    <div >
+        <label for="activities">
+            Activities: 
+        </label><br>
+        <div class="form-activities">
+            <mat-form-field appearance="fill">
+                <mat-label>Select activity</mat-label>
+                    <mat-select [formControl]="activityControl">
+                        <mat-option>--</mat-option>
+                        <mat-option *ngFor="let act of activities" [value]="act">
+                        {{act.activityName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+        
+                <div>OR</div>
+                <button mat-raised-button color="warn" class="button" (click)="openDialog()">  Add Activity</button>
+        </div>  
+    </div>
+
+  <div *ngIf="selectedActivities?.length > 0">
+      <app-activity [activities]="selectedActivities"></app-activity>
+  </div>
+<div>

@@ -5,7 +5,7 @@ import { HomeComponent } from '../home/home.component';
 import { ICruiseActivity } from '../interfaces/cruiseActivities.interface';
 import { IPort } from '../interfaces/port.interface';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+
 
 const CRUISE_ACTIVITIES: ICruiseActivity[] =[
   { id: 0, date: new Date(), time: "13:00", location: "vas" },
@@ -22,8 +22,6 @@ const PORT: IPort[] = [
   templateUrl: './cruise.component.html',
   styleUrls: ['./cruise.component.css']
 })
-
-
 
 export class CruiseComponent implements OnInit {
   cruise;

@@ -1,0 +1,7 @@
+.form-ports{
+    display: flex;
+    justify-content: space-between;
+}
+.button{
+    height: 50px;
+}

@@ -1,0 +1,30 @@
+<div class="port" *ngFor="let activity of activities">
+    <div class="port-comp">
+        <p>Activity name</p>
+        <p>{{activity?.activityName}}</p>
+    </div>
+    <div class="port-comp">
+        <p>Start date</p>
+        <p>{{activity?.startDate | date}}</p>
+    </div>
+    <div class="port-comp">
+        <p>Start time</p>
+        <p>{{activity?.startTime.hours}}h {{activity?.startTime.minutes}}min </p>
+    </div>
+    <div class="port-comp">
+        <p>Duration </p>
+        <p>{{activity?.duration}}</p>
+    </div>
+    <div class="port-comp">
+        <p>Location </p>
+        <p>{{activity?.location}}</p>
+    </div>
+   
+    <button mat-fab color="warn" (click)="deleteElem(activity)">
+        <mat-icon>delete</mat-icon>
+    </button>
+   
+</div>
+
+
+

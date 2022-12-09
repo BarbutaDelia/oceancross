@@ -1,0 +1,35 @@
+<div class="title-port">
+    ADD A PORT 
+  </div><br>
+<div mat-dialog-content class="add-port">
+    <div class="input-data">
+        <label>Port name: </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.portName">
+        </mat-form-field>
+    </div>
+    <div class="input-data">
+        <label>Arrival date: </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.arrivalDate">
+        </mat-form-field>
+        
+    </div>
+    <div class="input-data">
+        <label>Arrival Time: </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.arrivalTime">
+        </mat-form-field>
+        
+    </div>
+    <div class="input-data">
+        <label>Duration : </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.duration">
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" color="warn">CLOSE</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="warn">SAVE</button>
+</div>

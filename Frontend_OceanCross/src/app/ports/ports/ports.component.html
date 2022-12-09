@@ -1,0 +1,26 @@
+<div class="port" *ngFor="let port of ports">
+    <div class="port-comp">
+        <p>Port name</p>
+        <p>{{port?.portName}}</p>
+    </div>
+    <div class="port-comp">
+        <p>Arrival date</p>
+        <p>{{port?.arrivalDate | date}}</p>
+    </div>
+    <div class="port-comp">
+        <p>Arrival time</p>
+        <p>{{port?.arrivalTime.hours}}h {{port?.arrivalTime.minutes}}min </p>
+    </div>
+    <div class="port-comp">
+        <p>Duration of the stay</p>
+        <p>{{port?.duration}}</p>
+    </div>
+   
+    <button mat-fab color="warn" (click)="deleteElem(port)">
+        <mat-icon>delete</mat-icon>
+    </button>
+   
+</div>
+
+
+

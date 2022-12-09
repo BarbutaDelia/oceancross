@@ -9,6 +9,11 @@ import { HomeComponent } from './home/home.component';
 import { CruisePortCardComponent } from './cruise-port-card/cruise-port-card.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CruiseComponent } from './cruise/cruise.component';
+import { PortsModule } from '../ports/ports.module';
+import { AddPortComponent } from '../ports/add-port/add-port.component';
+import { ActivityComponent } from './activity/activity.component';
+import { AddActivityComponent } from './add-activity/add-activity.component';
+import { FormCruiseActivityComponent } from './form-cruise-activity/form-cruise-activity.component';
 @NgModule({
   declarations: [
     AddCruiseComponent,
@@ -17,13 +22,17 @@ import { CruiseComponent } from './cruise/cruise.component';
     CardCruiseComponent,
     CruisePortCardComponent,
     WishlistComponent,
+    AddActivityComponent,
+    FormCruiseActivityComponent,
+    ActivityComponent,
     CruiseComponent
     
   ],
   imports: [
     CommonModule,
     CruisesRoutingModule,
-    SharedModule
+    SharedModule,
+    PortsModule
   ]
 })
 export class CruisesModule { }

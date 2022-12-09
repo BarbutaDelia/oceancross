@@ -1,1 +1,41 @@
-<p>port-activites works!</p>
+<div class="title-port">
+    {{port.portName}}
+  </div><br>
+  <div class="title-details">
+    {{port.arrivalDate| date}},   {{port.arrivalTime.hours}} h ,   {{port.arrivalTime.minutes}} min , 
+  </div>
+  <div class="title-details"> The cruise will stop in {{port.portName}} for {{port.duration}}</div>
+  
+  <div class="activities">
+    <div class="example-container">
+      <h2>All Activities</h2>
+      <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="activities"
+        [cdkDropListConnectedTo]="[doneList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let activity of activities" cdkDrag>
+          <app-port-details-card [portActivity] = "activity.portActivity" [portActivitySchedule] = "activity.portActivitySchedule"></app-port-details-card>
+        </div>
+      </div>
+    </div>
+   <!-- <div class="line"></div> -->
+    <div class="example-container">
+      <h2>My activies</h2>
+    
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="myactivities"
+        [cdkDropListConnectedTo]="[todoList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let activity of myactivities" cdkDrag>
+          <app-port-details-card [portActivity] = "activity.portActivity" [portActivitySchedule] = "activity.portActivitySchedule"></app-port-details-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button color="warn" (click)="saveButton()" class ="save-button">Save</button>  

@@ -1,1 +1,61 @@
-<p>add-cruise works!</p>
+<div class="title-cruise">
+    ADD A CRUISE 
+  </div>
+  <form [formGroup]="addCruiseForm" class="formular">
+  
+      <div>
+        <label for="name"> Cruise name: </label>
+        <input id="name" type="text" formControlName="name">
+      </div>
+  
+      <mat-form-field style="width: 100%">
+        <mat-label>Start date: </mat-label>
+        <input
+            class="pointer"
+            readonly
+            matInput
+            [matDatepicker]="startPicker"
+            formControlName="startDate"
+            (click)="startPicker.open()"
+        />
+        <mat-datepicker-toggle
+            matSuffix
+            [for]="startPicker"
+            matTooltip="Change date"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+  
+    <mat-form-field style="width: 100%">
+        <mat-label>End date: </mat-label>
+        <input
+            class="pointer"
+            matInput
+            readonly
+            [matDatepicker]="endPicker"
+            formControlName="endDate"
+            (click)="endPicker.open()"
+            [min]="startDateSprint"
+        />
+        <mat-datepicker-toggle
+            matSuffix
+            [for]="endPicker"
+            matTooltip="Change date"
+            min="startDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+  
+    <div>
+      <label for="price">
+        Price: 
+      </label>
+      <input id="price" type="text" formControlName="price">
+    </div>
+    
+    <app-ports-dropdown></app-ports-dropdown>
+    
+    <app-form-cruise-activity></app-form-cruise-activity>
+      
+    <button mat-raised-button color="warn"  type="submit" (click)="onSubmit()">Add Cruise</button>
+    </form>

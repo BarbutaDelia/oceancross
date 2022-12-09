@@ -1,0 +1,41 @@
+<div class="title-port">
+    ADD AN ACTIVITY 
+  </div><br>
+<div mat-dialog-content class="add-port">
+    <div class="input-data">
+        <label>Activity name: </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.activityName">
+        </mat-form-field>
+    </div>
+    <div class="input-data">
+        <label>Start date: </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.startDate">
+        </mat-form-field>
+        
+    </div>
+    <div class="input-data">
+        <label>Start Time: </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.startTime">
+        </mat-form-field>
+        
+    </div>
+    <div class="input-data">
+        <label>Duration : </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.duration">
+        </mat-form-field>
+    </div>
+    <div class="input-data">
+        <label>Location : </label>
+        <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="data.location">
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" color="warn">CLOSE</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="warn">SAVE</button>
+</div>
