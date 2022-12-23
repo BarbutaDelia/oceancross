@@ -61,6 +61,7 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/api/cruises/**").permitAll()
                 .anyRequest().authenticated();
 
         //TODO Aici trebuie dat permit pt metode de auth

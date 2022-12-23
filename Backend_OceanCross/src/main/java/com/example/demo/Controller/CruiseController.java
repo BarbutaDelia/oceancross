@@ -1,21 +1,54 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Entities.Cruise;
+import com.example.demo.Model.Exceptions.CollectionOfCruisesNotFound;
+import com.example.demo.Model.Exceptions.CruiseNotFound;
+import com.example.demo.Model.Services.CruiseService;
+import com.example.demo.View.DTOs.CruiseDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+import static com.example.demo.Model.Util.Conversion.getCruiseDtoFromCruise;
+import static com.example.demo.Model.Util.Conversion.getCruiseDtosFromCruises;
+
 @RestController
 @RequestMapping("api/cruises")
 public class CruiseController {
+    @Autowired
+    private CruiseService cruiseService;
+
     @GetMapping("")
-    public ResponseEntity<?> getAllCruises() {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> getAllCruises(){
+        try{
+            List<Cruise> cruises = cruiseService.listAllCruises();
+            List<CruiseDto> cruiseDtos = getCruiseDtosFromCruises(cruises);
+            return new ResponseEntity<>(cruiseDtos, HttpStatus.OK);
+        }
+        catch(CollectionOfCruisesNotFound e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCruise(@PathVariable Integer id) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> getCruise(@PathVariable Long id){
+        try{
+            Cruise cruise = cruiseService.getCruise(id);
+            CruiseDto cruiseDto = getCruiseDtoFromCruise(cruise);
+            return new ResponseEntity<>(cruiseDto, HttpStatus.OK);
+        }
+        catch(CruiseNotFound e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<?> getCruise(@PathVariable Integer id) {
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
     @PostMapping("")
     public ResponseEntity<?> addCruise() {
