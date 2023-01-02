@@ -33,4 +33,12 @@ public class CruiseService {
         else
             throw new CruiseNotFound(id);
     }
+
+    public void deleteCruise( Long id){
+        if(cruiseRepository.findById(id).isPresent()) {
+            cruiseRepository.deleteById(id);
+        }
+        else
+            throw new CruiseNotFound(id);
+    }
 }

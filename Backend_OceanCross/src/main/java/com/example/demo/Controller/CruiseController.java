@@ -56,8 +56,14 @@ public class CruiseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCruise(@PathVariable Integer id) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> deleteCruise(@PathVariable Long id) {
+        try{
+            cruiseService.deleteCruise(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch(CruiseNotFound e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/{id}/ports")
@@ -67,7 +73,7 @@ public class CruiseController {
 
     @DeleteMapping("/{id}/ports/{port_id}")
     public ResponseEntity<?> deleteCruisePort(@PathVariable Integer port_id) {
-        return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/{id}/onboardActivities")
