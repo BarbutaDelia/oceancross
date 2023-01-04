@@ -50,6 +50,9 @@ public class AuthController {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         String role = String.valueOf(userDetails.getAuthorities());
 
+        //fiindca am nevoie sa creez rolurile ca lista de grantedAuthorities, role e de fapt o lista, si ii scot []
+        role = role.substring(1, role.length() - 1);
+
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
