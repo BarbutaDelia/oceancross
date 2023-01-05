@@ -1,4 +1,19 @@
-<!-- <app-admin-menu></app-admin-menu> -->
-<!-- <app-user-auth-menu></app-user-auth-menu> -->
-<app-user-menu></app-user-menu>
+<div *ngIf="localStorageService.connectedUser?.username!=''">
+    <div *ngIf="localStorageService.connectedUser?.role==='admin'">
+        <app-admin-menu></app-admin-menu>
+    </div>
+    <div *ngIf="localStorageService.connectedUser?.role!=='admin'">
+        <app-user-auth-menu></app-user-auth-menu>
+    </div>
+</div>
+<div *ngIf="localStorageService.connectedUser?.username===''">
+    <app-user-menu></app-user-menu>
+</div>
+
+<hr class="line">
 <router-outlet></router-outlet>
+<!-- TODO Trebuie sa-l adaug mai dupa ce termin tot-->
+<!-- <footer class="footer">
+    <hr class="line">
+   <p> &#169; TADAM 2022 </p>
+</footer>   -->

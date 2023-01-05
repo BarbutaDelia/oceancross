@@ -1,11 +1,9 @@
 .login-box {
-    position: absolute;
-    top: 50%;
-    left: 70%;
-    width: 400px;
+    text-align: center;
+    position: relative;
+    width: 600px;
+    height: 350px;
     padding: 40px;
-    transform: translate(-50%, -50%);
-    background:transparent;
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
@@ -14,7 +12,7 @@
   .login-box h2 {
     margin: 0 0 30px;
     padding: 0;
-    color: rgb(0, 0, 0);
+    color: blue;
     text-align: center;
   }
   
@@ -26,10 +24,10 @@
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
-    color: rgb(0, 0, 0);
+    color: blue;
     margin-bottom: 30px;
     border: none;
-    border-bottom: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid blue;
     outline: none;
     background: transparent;
   }
@@ -39,7 +37,7 @@
     left: 0;
     padding: 10px 0;
     font-size: 16px;
-    color: rgb(0, 0, 0);
+    color: blue;
     pointer-events: none;
     transition: .5s;
   }
@@ -51,4 +49,16 @@
     color: #f44336;
     font-size: 12px;
   }
-  
+  .login-format{
+    max-height: 900px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .login-div{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    padding-left: 10px;
+  }

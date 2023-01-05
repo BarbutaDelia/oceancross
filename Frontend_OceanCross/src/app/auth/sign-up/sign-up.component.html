@@ -1,41 +1,48 @@
-<div style="display:flex;justify-content: left;margin: 100px;">
-    <div style="margin:20px">
-        <img src="\assets\image\Royal-Caribbean-Allure-of-the-Seas-576.jpg" height="400px" width="670px">
-    </div>
-    <div class="login-box" >
-        <h2>Sign Up</h2><br>
-        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-            <div class="user-box">
-                
-                <input id="name" type="text" formControlName="name" required>
-                <label for="name">
-                    Name
-                </label>
-            </div>
+<div class="login-format">
+    <app-animation></app-animation>
+    <div class="login-div">
+        <div class="login-box" >
+            <h2>Sign Up</h2><br>
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+                <div class="user-box">
+                    <input id="name" type="text" formControlName="name" required>
+                    <label for="name">
+                        Name
+                    </label>
+                </div>
 
-            <div class="user-box">
+                <div class="user-box">
+                    
+                    <input id="username" type="text" formControlName="username" required>
+                    <label for="username">
+                        Username
+                    </label>
+                </div>
                 
-                <input id="username" type="text" formControlName="username" required>
-                <label for="username">
-                    Username
-                </label>
-            </div>
-            
-            <div class="user-box">
-                <input id="password" type="password" formControlName="password" required>
-                <label for="password">
-                    Password
-                </label>
-            </div>
-            
-            <div class="user-box">
-                <input id="confirmpassword" type="password" formControlName="confirmpassword" required>
-                <label for="confirmpassword">
-                    Confirm Password
-                </label>
-            </div>
+                <div class="user-box">
+                    <input id="password" type="password" formControlName="password" required>
+                    <label for="password">
+                        Password
+                    </label>
+                </div>
+                
+                <div class="user-box">
+                    <input id="confirmpassword" type="password" formControlName="confirmpassword" required>
+                    <label for="confirmpassword">
+                        Confirm Password
+                    </label>
+                </div>
+                <mat-form-field appearance="fill" class="user-type">
+                    <mat-label class="mat-label">Account Type</mat-label>
+                        <mat-select [formControl]="typesControl">
+                            <mat-option *ngFor="let type of types" [value]="type" class="mat-option">
+                           {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field><br>
 
-            <button mat-raised-button color="warn" class="button" type="submit">Sign Up</button>
-        </form>
+                <button mat-raised-button color="warn" class="button" type="submit">Sign Up</button>
+            </form>
+        </div>
     </div>
 </div>

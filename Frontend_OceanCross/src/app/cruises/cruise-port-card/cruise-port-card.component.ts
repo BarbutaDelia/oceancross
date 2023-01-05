@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Card, Port } from '../wishlist/wishlist.component';
+import { ICruise } from '../models/cruise.interface';
 
 @Component({
   selector: 'app-cruise-port-card',
@@ -10,9 +10,8 @@ import { Card, Port } from '../wishlist/wishlist.component';
 export class CruisePortCardComponent implements OnInit {
 
   constructor(private router:Router) { }
-  @Input() card:Card=new Card();
-  ngOnInit(): void {
-  }
+  @Input() cruise:ICruise;
+  ngOnInit(): void { }
   viewActivities(id:String):void
   {
     this.router.navigateByUrl('/port-activities/'+id);

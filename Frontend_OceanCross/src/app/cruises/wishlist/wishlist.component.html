@@ -1,7 +1,5 @@
 <div>
-    <div *ngFor="let item of cards">
-        <app-cruise-port-card [card]="item">
-
-        </app-cruise-port-card>
+    <div *ngFor="let cruise of cruisesFilter">
+        <app-cruise-port-card [cruise]="cruise"> </app-cruise-port-card>
    </div>
 </div>

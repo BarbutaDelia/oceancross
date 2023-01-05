@@ -63,6 +63,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "OceanCross:build",
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "OceanCross:build:production"
@@ -70,13 +74,14 @@
             "development": {
               "browserTarget": "OceanCross:build:development"
             }
+           
           },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "OceanCross:build"
+            "browserTarget": "OceanCross:build"            
           }
         },
         "test": {

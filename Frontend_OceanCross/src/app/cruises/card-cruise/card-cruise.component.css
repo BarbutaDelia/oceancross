@@ -1,21 +1,40 @@
-.cardBody
-{
+.cardBody {
     border-style: solid;
-    height:21rem;
-    width:30rem; 
-    margin-left:3rem; 
-    margin-right:3rem;
-    margin-top: 2rem;
+    color: blue;
+    background-color: white;
+    height:336px;
+    width:430px; 
+    margin-left:48px; 
+    margin-right:48px;
+    margin-top: 32px;
 }
-.flex
-{
+
+.image-card{
     display:flex;
     align-items: center;
     justify-content: center;
+    margin-top:30px;
 }
-#title
-{   height: fit-content;
+
+#title {   
+    height: fit-content;
     text-align:center;
     margin:10px;
     font-size: 30px;
+}
+.button-card{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:20px;
+}
+.dates{
+    text-align: center;
+}
+.button-card-admin{
+    text-align: center;
+    margin-right: 10px;
+}
+.button-card-admin button{
+    margin: 10px;
 }
