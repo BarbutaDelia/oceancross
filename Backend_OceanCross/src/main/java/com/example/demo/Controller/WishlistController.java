@@ -19,7 +19,7 @@ import org.springframework.web.servlet.function.EntityResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/wishlist")
+@RequestMapping("/api/wishlist")
 public class WishlistController
 {
     @Autowired

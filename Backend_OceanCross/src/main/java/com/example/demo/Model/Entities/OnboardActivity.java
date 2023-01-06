@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
+import java.sql.Time;
 
 @Getter
 @Setter
@@ -32,8 +32,7 @@ public class OnboardActivity {
     @Temporal(TemporalType.DATE)
     Date start_date;
 
-    @Temporal(TemporalType.TIME)
-    Date start_time;
+    Time start_time;
 
     private Integer duration;
 

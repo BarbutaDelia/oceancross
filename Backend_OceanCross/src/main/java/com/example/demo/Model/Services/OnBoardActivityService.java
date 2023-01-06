@@ -3,6 +3,7 @@ package com.example.demo.Model.Services;
 import com.example.demo.Model.Entities.OnboardActivity;
 import com.example.demo.Model.Entities.Port;
 import com.example.demo.Model.Exceptions.Activities.CollectionOfActivitiesNotFound;
+import com.example.demo.Model.Exceptions.OnboardActivities.OnboardActivityNotFound;
 import com.example.demo.Model.Exceptions.Ports.PortNotFound;
 import com.example.demo.Model.Repositories.OnBoardActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,16 @@ public class OnBoardActivityService {
     public void saveActivity(OnboardActivity onBoardActivity) {
         onBoardActivityRepository.save(onBoardActivity);
     }
+    public void saveActivities(List<OnboardActivity> onboardActivities) {
+        onBoardActivityRepository.saveAll(onboardActivities);
+    }
 
     public OnboardActivity getActivity(Long id) {
         if(onBoardActivityRepository.findById(id).isPresent())
             return onBoardActivityRepository.findById(id).get();
         else {
-            throw new PortNotFound(id);
+            throw new OnboardActivityNotFound(id);
         }
     }
+
 }

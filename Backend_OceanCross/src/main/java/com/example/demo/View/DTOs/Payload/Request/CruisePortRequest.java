@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Getter
@@ -12,8 +13,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CruisePortRequest {
-    private Long id; // id-ul portului
+    private Long id;
+    private Long port_id;
     private Date arrival_date;
-    private Date arrival_time;
+    private Time arrival_time;
     private Integer duration;
 }

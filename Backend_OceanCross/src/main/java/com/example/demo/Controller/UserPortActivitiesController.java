@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/port-activities")
+@RequestMapping("/api/port-activities")
 public class UserPortActivitiesController
 {
     @Autowired

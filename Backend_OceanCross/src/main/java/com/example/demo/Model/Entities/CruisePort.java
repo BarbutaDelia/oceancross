@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 @Getter
@@ -34,8 +35,7 @@ public class CruisePort {
     @Temporal(TemporalType.DATE)
     Date arrival_date;
 
-    @Temporal(TemporalType.TIME)
-    Date arrival_time;
+    Time arrival_time;
 
     private Integer duration;
 
