@@ -49,6 +49,7 @@ public class CruiseService {
         else
             throw new CruiseNotFound(id);
     }
+
     public void deleteCruisePort( Long id){
         if(cruisePortsRepository.findById(id).isPresent()) {
             cruisePortsRepository.deleteById(id);
@@ -56,11 +57,22 @@ public class CruiseService {
         else
             throw new CruisePortNotFound(id);
     }
-    public void deleteCruiseOnBoardActivity(Long id){
-        if(onBoardActivityRepository.findById(id).isPresent()) {
+    public void deleteCruiseOnBoardActivity(Long id) {
+        if (onBoardActivityRepository.findById(id).isPresent()) {
             onBoardActivityRepository.deleteById(id);
-        }
-        else
+        } else
             throw new OnboardActivityNotFound(id);
+
+    }
+    public List<Cruise> listSpecifiedCruises(List<Long> ids)
+    {
+        if(!cruiseRepository.findCruisesByIds(ids).isEmpty())
+        {
+            return cruiseRepository.findCruisesByIds(ids);
+        }else
+        {
+            throw new CollectionOfCruisesNotFound();
+        }
+
     }
 }

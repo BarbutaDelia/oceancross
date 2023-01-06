@@ -1,0 +1,44 @@
+.button-style{
+    margin:0.5rem
+}
+
+.page{
+    display: flex;
+}
+
+.card-cruise{
+    width: 460px;
+}
+.search-label{
+    color: red;
+    background-color: white;
+    height:36px;
+    width:440px; 
+    margin-left:48px; 
+    margin-right:48px;
+    margin-top: 32px;
+    font-size: 15px;
+    /* border-color: blue; */
+}
+
+.pagination-and-search{
+    display: flex;
+}
+
+#first{
+    position: relative;
+    bottom: -20px;
+}
+.title{
+    margin:40px;
+}
+#title{
+    color:red;
+}
+.cruise-card{
+    display:flex; 
+    flex-flow: row wrap;
+}
+.cruises{
+    margin-bottom: 5rem;
+}

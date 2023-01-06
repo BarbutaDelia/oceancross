@@ -15,41 +15,34 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSelectModule} from '@angular/material/select';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
+import { SnackBarComponent } from './snack-bar/snack-bar.component';
+
+const modules = [MatButtonModule, MatTableModule, MatSortModule, MatToolbarModule, 
+                  DragDropModule, 
+                  MatDatepickerModule, 
+                  ReactiveFormsModule, 
+                  MatFormFieldModule, 
+                  MatNativeDateModule, 
+                  MatInputModule, 
+                  BrowserAnimationsModule,
+                  MatExpansionModule,
+                  MatIconModule,
+                  MatMenuModule,
+                  MatSlideToggleModule,
+                  MatSelectModule,
+                  MatDialogModule,
+                  FormsModule];
 @NgModule({
-  declarations: [],
-  imports: [MatButtonModule, MatTableModule, MatSortModule, MatToolbarModule,
-    MatButtonModule, 
-    DragDropModule, 
-    MatDatepickerModule, 
-    ReactiveFormsModule, 
-    MatFormFieldModule, 
-    MatNativeDateModule, 
-    MatInputModule, 
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatMenuModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatDialogModule,
-    FormsModule],
-  exports:[MatButtonModule, MatTableModule, MatSortModule, MatToolbarModule,MatButtonModule, 
-    DragDropModule, 
-    MatDatepickerModule, 
-    ReactiveFormsModule, 
-    MatFormFieldModule, 
-    MatNativeDateModule, 
-    MatInputModule, 
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatMenuModule,
-    MatSlideToggleModule,
-    MatSelectModule,
-    MatDialogModule,
-    FormsModule],
+  declarations: [
+    SnackBarComponent
+  ],
+  imports: modules,
+  exports:[modules,SnackBarComponent],
+  providers:[ 
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 1500 }},     
+    {provide: MatDialogRef,useValue: {}}
+  ]
 })
 export class SharedModule { }

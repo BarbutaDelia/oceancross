@@ -10,10 +10,13 @@ import { CruisePortCardComponent } from './cruise-port-card/cruise-port-card.com
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CruiseComponent } from './cruise/cruise.component';
 import { PortsModule } from '../ports/ports.module';
-import { AddPortComponent } from '../ports/add-port/add-port.component';
 import { ActivityComponent } from './activity/activity.component';
 import { AddActivityComponent } from './add-activity/add-activity.component';
 import { FormCruiseActivityComponent } from './form-cruise-activity/form-cruise-activity.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LineComponent } from './line/line.component';
+import { AnimationComponent } from './animation/animation.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AddCruiseComponent,
@@ -25,14 +28,19 @@ import { FormCruiseActivityComponent } from './form-cruise-activity/form-cruise-
     AddActivityComponent,
     FormCruiseActivityComponent,
     ActivityComponent,
-    CruiseComponent
+    CruiseComponent,
+    LineComponent,
+    AnimationComponent,
     
   ],
   imports: [
     CommonModule,
     CruisesRoutingModule,
     SharedModule,
-    PortsModule
-  ]
+    PortsModule,
+    HttpClientModule,
+    NgxPaginationModule
+  ],
+  exports: [HomeComponent]
 })
 export class CruisesModule { }

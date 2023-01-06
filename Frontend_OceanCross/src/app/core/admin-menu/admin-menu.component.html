@@ -1,8 +1,6 @@
-<mat-toolbar>
-    <span>OCEANCROSS</span>
-     <a mat-button>View cruises</a>
-     <a mat-button>Add a cruise</a>
-    <span class="flexExpand"></span>
-        <div>
-            <a mat-button> Logout </a>
-        </div>
+<mat-toolbar class="flexExpand">
+    <div class="buttons">
+        <a mat-button href="/">View cruises</a>
+    </div>
+    <button mat-button color="warn" (click)="logout()" class="button"> Logout </button>
+</mat-toolbar>

@@ -9,24 +9,35 @@ h1{
 .wrapper{
     margin:auto;
     width:calc(75%);
-}
-
-table {
-    width: 100%;
     
 }
-
-hr {
-    height:1px;
-    background-color: black;
+.background-image{
+    background-image: url("/assets/image/image2.png");
+    background-size: 100% 100%;
+    min-width: 99%;
+    min-height: 99%;
+    position: fixed; 
+    background-color: transparent;
 }
 
-.up{
-    margin-bottom: 50px;
-    margin-top: 25px;
+table{
+    width: 100%;
 }
-
-.down{
-    margin-top: 50px;
-    margin-bottom: 25px;
+th, td {
+    border:1px solid black;
+    text-align: center;
+    color: black;
+    background-color: transparent;
+  }
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+    color: black;
+    background-color: transparent;
+ }
+ .white{
+    color: black;
+ }
+.button{
+    text-align: center;
 }

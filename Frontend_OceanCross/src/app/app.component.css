@@ -1,0 +1,11 @@
+.line{
+    border:solid; 
+    width:calc(75%);
+}
+.footer{
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+
+}

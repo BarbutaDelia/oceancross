@@ -1,3 +1,19 @@
 .flexExpand {
-    flex: 1 1 auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+}
+a{
+    font-size: 25px;
+}
+.title{
+    color:red;
+}
+.button{
+    font-size: 25px;
 }

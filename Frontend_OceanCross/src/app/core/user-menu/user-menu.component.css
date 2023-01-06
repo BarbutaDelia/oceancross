@@ -1,6 +1,11 @@
 .flexExpand {
-    flex: 1 1 auto;
+    display: flex;
+    justify-content: space-between;
 }
-button:hover{
-    transform: scale(1.1); 
+.buttons{
+    display: flex;
+    justify-content: center;
+}
+.title{
+    color:red;
 }
