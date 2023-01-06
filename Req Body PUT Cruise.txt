@@ -1,0 +1,40 @@
+{
+    "id": 31,
+    "name": "Cruise12345 PUT",
+    "start_date": "2023-01-01",
+    "end_date": "2023-01-07",
+    "price": 12345.0,
+    "onboardActivities": [
+        {
+            "id": 48,
+            "name": " Snorkeling new",
+            "start_date": "2023-01-02",
+            "start_time": "08:35:10",
+            "duration": 6004,
+            "location": "Deck 42"
+        },
+        {
+            "id": -1,
+            "name": "New activity 3",
+            "start_date": "2023-01-02",
+            "start_time": "08:35:10",
+            "duration": 4,
+            "location": "Deck 36"
+        }
+    ],
+    "cruisePorts": [ {
+            "id": 20,
+            "port_id": 1,
+            "arrival_date": "2023-01-02",
+            "arrival_time": "10:30:00",
+            "duration": 120
+        },
+        {
+            "id": -1,
+            "port_id": 3,
+            "arrival_date": "2023-01-03",
+            "arrival_time": "11:11:11",
+            "duration": 8
+        }
+    ]
+}
