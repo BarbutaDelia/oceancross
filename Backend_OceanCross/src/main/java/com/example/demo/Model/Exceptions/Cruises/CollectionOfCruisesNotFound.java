@@ -1,4 +1,4 @@
-package com.example.demo.Model.Exceptions;
+package com.example.demo.Model.Exceptions.Cruises;
 
 public class CollectionOfCruisesNotFound extends RuntimeException {
     public CollectionOfCruisesNotFound() {

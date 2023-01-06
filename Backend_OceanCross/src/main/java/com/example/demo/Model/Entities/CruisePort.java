@@ -21,14 +21,12 @@ public class CruisePort {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @MapsId("id")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cruise_id")
     @JsonBackReference
     Cruise cruise;
 
-    @ManyToOne
-    @MapsId("id")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "port_id")
     @JsonBackReference
     Port port;

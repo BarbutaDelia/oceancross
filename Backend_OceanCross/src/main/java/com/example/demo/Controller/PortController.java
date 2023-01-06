@@ -1,13 +1,18 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.Entities.Port;
+import com.example.demo.Model.Entities.User;
 import com.example.demo.Model.Exceptions.Ports.CollectionOfPortsNotFound;
+import com.example.demo.Model.Repositories.PortRepository;
 import com.example.demo.Model.Services.PortService;
+import com.example.demo.View.DTOs.Payload.Request.AddPortRequest;
+import com.example.demo.View.DTOs.Payload.Response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -17,12 +22,14 @@ public class PortController {
 
     @Autowired
     private PortService portService;
+    @Autowired
+    private PortRepository portRepository;
 
     @GetMapping("")
     public ResponseEntity<?> getAllPorts() {
         try{
+            //TODO: Create DTOs and use them
             List<Port> ports = portService.listAllPorts();
-           // List<CruiseDto> cruiseDtos = getCruiseDtosFromCruises(cruises);
             return new ResponseEntity<>(ports, HttpStatus.OK);
         }
         catch(CollectionOfPortsNotFound e){
@@ -31,9 +38,18 @@ public class PortController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> addPort() {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> addPort(@Valid @RequestBody AddPortRequest addPortRequest) {
+        if (portRepository.existsByName(addPortRequest.getName())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: This port is already in database!"));
+        }
+        //if everything it`s ok, create the port
+        Port port = new Port(addPortRequest.getName(),addPortRequest.getLatitude(), addPortRequest.getLongitude() );
+        portRepository.save(port);
+        return ResponseEntity.ok(new MessageResponse("Port added successfully!"));
     }
+
 
     @GetMapping("/{port_id}/activities")
     public ResponseEntity<?> getAllPortActivities(@PathVariable Integer port_id) {

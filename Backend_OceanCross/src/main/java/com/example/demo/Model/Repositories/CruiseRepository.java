@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CruiseRepository extends JpaRepository<Cruise, Long> {
-//    Cruise findByName(String name);
+    Cruise findByName(String name);
 }
