@@ -1,0 +1,36 @@
+{
+  "name": "My Cruise123",
+  "start_date": "2023-01-01",
+  "end_date": "2023-01-07",
+  "price": 4020.0,
+  "onboardActivities": [
+    {
+      "name": "Snorkeling",
+      "start_date": "2023-01-02",
+      "start_time": "08:35:00",
+      "duration": 60,
+      "location": "Deck 4"
+    },
+    {
+      "name": "Sunbathing",
+      "start_date": "2023-01-03",
+      "start_time": "19:00:00",
+      "duration": 30,
+      "location": "Deck 5"
+    }
+  ],
+  "cruisePorts": [
+    {
+      "port_id": 1,
+      "arrival_date": "2023-01-02",
+      "arrival_time": "10:30:00",
+      "duration": 12
+    },
+    {
+      "port_id": 7,
+      "arrival_date": "2023-01-03",
+      "arrival_time": "11:45:00",
+      "duration": 8
+    }
+  ]
+}
