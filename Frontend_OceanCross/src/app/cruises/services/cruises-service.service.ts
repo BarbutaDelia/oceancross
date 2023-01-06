@@ -13,4 +13,5 @@ export class CruisesService {
   public getCruise(id: number): Observable<any> {
     return this.http.get(`/api/cruises/${id}`);
   }
+
 }

@@ -41,4 +41,15 @@ public class CruiseService {
         else
             throw new CruiseNotFound(id);
     }
+
+    public  List<Cruise> listSpecifiedCruises(List <Long> ids)
+    {
+        if(!cruiseRepository.findCruisesByIds(ids).isEmpty())
+        {
+            return cruiseRepository.findCruisesByIds(ids);
+        }else
+        {
+            throw new CollectionOfCruisesNotFound();
+        }
+    }
 }
