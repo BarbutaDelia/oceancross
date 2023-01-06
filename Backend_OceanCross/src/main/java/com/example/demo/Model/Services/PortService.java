@@ -25,6 +25,9 @@ public class PortService {
     public void savePort(Port port) {
         portRepository.save(port);
     }
+    public void savePorts(List<Port> ports) {
+        portRepository.saveAll(ports);
+    }
 
     public Port getPort(Long id) {
         if(portRepository.findById(id).isPresent())

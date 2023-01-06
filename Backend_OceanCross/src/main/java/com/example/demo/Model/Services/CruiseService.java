@@ -1,6 +1,7 @@
 package com.example.demo.Model.Services;
 
 import com.example.demo.Model.Entities.Cruise;
+import com.example.demo.Model.Entities.CruisePort;
 import com.example.demo.Model.Exceptions.Cruises.CollectionOfCruisesNotFound;
 import com.example.demo.Model.Exceptions.Cruises.CruiseNotFound;
 import com.example.demo.Model.Exceptions.Cruises.CruisePortNotFound;
@@ -31,8 +32,8 @@ public class CruiseService {
             throw new CollectionOfCruisesNotFound();
     }
 
-    public void saveCruise(Cruise cruise) {
-        cruiseRepository.save(cruise);
+    public Cruise saveCruise(Cruise cruise) {
+       return cruiseRepository.save(cruise);
     }
 
     public Cruise getCruise(Long id) {
@@ -49,10 +50,25 @@ public class CruiseService {
         else
             throw new CruiseNotFound(id);
     }
+    public void saveCruisePorts(List<CruisePort> cruisePorts)
+    {
+        cruisePortsRepository.saveAll(cruisePorts);
+    }
+    public void saveCruisePort(CruisePort cruisePort)
+    {
+        cruisePortsRepository.save(cruisePort);
+    }
 
     public void deleteCruisePort( Long id){
         if(cruisePortsRepository.findById(id).isPresent()) {
             cruisePortsRepository.deleteById(id);
+        }
+        else
+            throw new CruisePortNotFound(id);
+    }
+    public CruisePort getCruisePort( Long id){
+        if(cruisePortsRepository.findById(id).isPresent()) {
+            return cruisePortsRepository.findById(id).get();
         }
         else
             throw new CruisePortNotFound(id);

@@ -28,7 +28,6 @@ public class PortController {
     @GetMapping("")
     public ResponseEntity<?> getAllPorts() {
         try{
-            //TODO: Create DTOs and use them
             List<Port> ports = portService.listAllPorts();
             return new ResponseEntity<>(ports, HttpStatus.OK);
         }

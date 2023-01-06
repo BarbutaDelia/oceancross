@@ -13,6 +13,8 @@ import com.example.demo.Model.Repositories.CruiseRepository;
 import com.example.demo.Model.Repositories.OnBoardActivityRepository;
 import com.example.demo.Model.Repositories.PortRepository;
 import com.example.demo.Model.Services.CruiseService;
+import com.example.demo.Model.Services.OnBoardActivityService;
+import com.example.demo.Model.Services.PortService;
 import com.example.demo.View.DTOs.CruiseDto;
 import com.example.demo.View.DTOs.CruisePortDto;
 import com.example.demo.View.DTOs.OnboardActivityDTO;
@@ -29,11 +31,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.io.Console;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.demo.Model.Util.Conversion.getCruiseDtoFromCruise;
-import static com.example.demo.Model.Util.Conversion.getCruiseDtosFromCruises;
+import static com.example.demo.Model.Util.Conversion.*;
 
 @RestController
 @RequestMapping("api/cruises")
@@ -41,13 +44,11 @@ public class CruiseController {
     @Autowired
     private CruiseService cruiseService;
     @Autowired
-    private PortRepository portRepository;
+    private OnBoardActivityService onBoardActivityService;
     @Autowired
-    private CruisePortsRepository cruisePortRepository;
+    private PortService portService;
     @Autowired
-    private OnBoardActivityRepository onboardActivityRepository;
-    @Autowired
-    private CruiseRepository cruiseRepository;
+    private CruisePortsRepository cruisePortsRepository;
 
     @GetMapping("")
     public ResponseEntity<?> getAllCruises(){
@@ -73,72 +74,83 @@ public class CruiseController {
         }
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> getCruise(@PathVariable Integer id) {
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//TODO: De scos metoda veche de post dupa ce merge asta
-//    @PostMapping(value = "")
-//    public ResponseEntity<?> addCruise(@Valid @RequestBody CruiseRequest cruise) {
-//
-//        System.out.println(cruise);
-//
-//        return new ResponseEntity<>(cruise, HttpStatus.OK);
-//    }
-@PostMapping("") @Transactional
-public ResponseEntity<Object> createCruise(@RequestBody CruiseRequest cruiseRequest) {
-    // Validate the request body
-    if (cruiseRequest.getName() == null || cruiseRequest.getStart_date() == null || cruiseRequest.getEnd_date() == null ||
-            cruiseRequest.getPrice() == null || cruiseRequest.getOnboardActivities() == null || cruiseRequest.getCruisePorts() == null) {
-        return new ResponseEntity<>("Missing required fields", HttpStatus.BAD_REQUEST);
+    @PostMapping("") @Transactional
+    public ResponseEntity<Object> createCruise(@RequestBody CruiseRequest cruiseRequest) {
+        // Validate the request body
+        if (cruiseRequest.getName() == null || cruiseRequest.getStart_date() == null || cruiseRequest.getEnd_date() == null ||
+                cruiseRequest.getPrice() == null || cruiseRequest.getOnboardActivities() == null || cruiseRequest.getCruisePorts() == null) {
+            return new ResponseEntity<>("Missing required fields", HttpStatus.BAD_REQUEST);
+        }
+
+        try{
+
+
+        // Create the new cruise
+        Cruise cruise = new Cruise();
+        cruise.setName(cruiseRequest.getName());
+        cruise.setStart_date(cruiseRequest.getStart_date());
+        cruise.setEnd_date(cruiseRequest.getEnd_date());
+        cruise.setPrice(cruiseRequest.getPrice());
+
+        // Save the cruise to the database
+        Cruise savedCruise = cruiseService.saveCruise(cruise);
+
+        // Save the onboard activities and cruise ports to the database
+        List<OnboardActivity> onboardActivities = getOnboardActivitiesFromOnboardActivityDTOs(cruiseRequest.getOnboardActivities(), savedCruise);
+        onBoardActivityService.saveActivities(onboardActivities);
+        cruise.setOnboardActivities(onboardActivities);
+
+        List<CruisePort> cruisePorts = getCruisePortsFromCruisePortRequests(cruiseRequest.getCruisePorts(), savedCruise, portService);
+        cruiseService.saveCruisePorts(cruisePorts);
+        cruise.setCruisePorts(cruisePorts);
+
+        // Return the new cruise
+        return new ResponseEntity<>(savedCruise, HttpStatus.OK);
+        }
+        catch (RuntimeException e)
+        {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    //TODO: @Grabo fix arrival time and all time related staff format
-    // Create the new cruise
-    Cruise cruise = new Cruise();
-    cruise.setName(cruiseRequest.getName());
-    cruise.setStart_date(cruiseRequest.getStart_date());
-    cruise.setEnd_date(cruiseRequest.getEnd_date());
-    cruise.setPrice(cruiseRequest.getPrice());
 
-    // Save the cruise to the database
-    Cruise savedCruise = cruiseRepository.save(cruise);
+    @PutMapping("/{id}") // @Transactional
+    public ResponseEntity<Object> updateCruise(@PathVariable long id, @RequestBody CruiseRequest cruiseDto) {
+        // Validate the request body
+        if (cruiseDto.getName() == null || cruiseDto.getStart_date() == null || cruiseDto.getStart_date() == null ||
+                cruiseDto.getPrice() == null || cruiseDto.getOnboardActivities() == null || cruiseDto.getCruisePorts() == null) {
+            return new ResponseEntity<>("Missing required fields", HttpStatus.BAD_REQUEST);
+        }
+        try {
+            Cruise cruise = cruiseService.getCruise(id);
+            cruise.setName(cruiseDto.getName());
+            cruise.setStart_date(cruiseDto.getStart_date());
+            cruise.setEnd_date(cruiseDto.getEnd_date());
+            cruise.setPrice(cruiseDto.getPrice());
 
-    // Save the onboard activities and cruise ports to the database
-    List<OnboardActivity> onboardActivities = new ArrayList<>();
-    for (OnboardActivityDTO onboardActivityDto : cruiseRequest.getOnboardActivities()) {
-        OnboardActivity onboardActivity = new OnboardActivity();
-        onboardActivity.setCruise(savedCruise);
-        onboardActivity.setName(onboardActivityDto.getName());
-        onboardActivity.setStart_date(onboardActivityDto.getStart_date());
-        onboardActivity.setStart_time(onboardActivityDto.getStart_time());
-        onboardActivity.setDuration(onboardActivityDto.getDuration());
-        onboardActivity.setLocation(onboardActivityDto.getLocation());
-        onboardActivities.add(onboardActivity);
-       // System.out.println(onboardActivity.toString());
+            cruiseService.saveCruise(cruise);
+
+            List<OnboardActivity> onboardActivities = getOnboardActivitiesFromOnboardActivityDTOsPUT(cruiseDto.getOnboardActivities(), cruise,onBoardActivityService);
+            for (OnboardActivity onboardActivity:onboardActivities
+                 ) {
+                onBoardActivityService.saveActivity(onboardActivity);
+            }
+
+
+            List<CruisePort> cruisePorts = getCruisePortsFromCruisePortRequestsPUT(cruiseDto.getCruisePorts(), cruise, portService, cruiseService);
+
+            for (CruisePort cruisePort: cruisePorts
+                 ) {
+                cruiseService.saveCruisePort(cruisePort);
+            }
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-    onboardActivityRepository.saveAll(onboardActivities);
-    cruise.setOnboardActivities(onboardActivities);
-
-    List<CruisePort> cruisePorts = new ArrayList<>();
-    for (CruisePortRequest cruisePortDto : cruiseRequest.getCruisePorts()) {
-        CruisePort cruisePort = new CruisePort();
-        Port port = portRepository.findById(cruisePortDto.getId()).get();
-        System.out.println(port.getName() + port.getId());
-        System.out.println(port.to_string());
-
-        cruisePort.setPort(port);
-        cruisePort.setCruise(savedCruise);
-        cruisePort.setArrival_date(cruisePortDto.getArrival_date());
-        cruisePort.setArrival_time(cruisePortDto.getArrival_time());
-        cruisePort.setDuration(cruisePortDto.getDuration());
-        cruisePorts.add(cruisePort);
-    }
-    cruisePortRepository.saveAll(cruisePorts);
-    cruise.setCruisePorts(cruisePorts);
-
-    // Return the new cruise
-    return new ResponseEntity<>(savedCruise, HttpStatus.OK);
-}
 
 
     @DeleteMapping("/{id}")
