@@ -1,9 +1,6 @@
 package com.example.demo.Model.Util;
 
-import com.example.demo.Model.Entities.Cruise;
-import com.example.demo.Model.Entities.CruisePort;
-import com.example.demo.Model.Entities.OnboardActivity;
-import com.example.demo.Model.Entities.Port;
+import com.example.demo.Model.Entities.*;
 import com.example.demo.Model.Exceptions.Cruises.CruisePortNotFound;
 import com.example.demo.Model.Services.CruiseService;
 import com.example.demo.Model.Services.OnBoardActivityService;
@@ -12,6 +9,7 @@ import com.example.demo.View.DTOs.CruiseDto;
 import com.example.demo.View.DTOs.CruisePortDto;
 import com.example.demo.View.DTOs.OnboardActivityDTO;
 import com.example.demo.View.DTOs.Payload.Request.CruisePortRequest;
+import com.example.demo.View.DTOs.Payload.Response.PortActivityScheduleResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -147,5 +145,16 @@ public class Conversion {
         }
 
         return cruisePorts;
+    }
+
+    public static List<PortActivityScheduleResponse> PortActivityScheduleTOPortActivityScheduleResponse(List<PortActivitiesSchedule> portActivitiesSchedule)
+    {
+        List<PortActivityScheduleResponse> portActivityScheduleResponses = new ArrayList<PortActivityScheduleResponse>();
+        for (PortActivitiesSchedule pas:portActivitiesSchedule)
+        {
+            String start_date_time = pas.getStart_date() + " " + pas.getStart_time();
+            portActivityScheduleResponses.add(new PortActivityScheduleResponse(pas.getId(), pas.getPortActivityId(), start_date_time, pas.getDuration(), pas.getLocation(), pas.getPrice()));
+        }
+        return portActivityScheduleResponses;
     }
 }

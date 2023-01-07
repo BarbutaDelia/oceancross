@@ -10,4 +10,10 @@ public interface PortActivitiesRepository extends JpaRepository<PortActivities,L
 {
     public List<Long> findIdByPortId(Long id);
     public List<PortActivities> findByPortId(Long id);
+    public PortActivities findByName(String name);
+    List<PortActivities> findByPortIdAndUserId(Long portId, Long userId);
+
+    void deleteByNameAndUserIdAndPortId(String name, Long userId, Long portId);
+
+    void deleteAllByUserIdAndPortId(Long userId, Long portId);
 }
