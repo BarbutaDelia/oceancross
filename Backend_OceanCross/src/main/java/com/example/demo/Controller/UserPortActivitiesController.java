@@ -130,4 +130,10 @@ public class UserPortActivitiesController
         }
 
     }
+    @DeleteMapping("/{user_id}/{cruise_id}")
+    public ResponseEntity<?> deleteAllActivitiesFromUser(@PathVariable Long user_id,@PathVariable Long cruise_id)
+    {
+        userPortActivitiesService.deleteAllFromUser(user_id,cruise_id);
+        return  new ResponseEntity<>(HttpStatus.OK);
+    }
 }

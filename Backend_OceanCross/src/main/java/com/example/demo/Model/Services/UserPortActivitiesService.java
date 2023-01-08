@@ -28,7 +28,8 @@ public class UserPortActivitiesService
     PortActivitiesRepository portActivitiesRepository;
     @Autowired
     CruiseService cruiseService;
-
+    @Autowired
+    WishlistService wishlistService;
     public List<UserPortActivities> getCurrentUserActivities(List<Long> cuid)
     {
         List<UserPortActivities>   userPortActivities=new ArrayList<>();
@@ -145,16 +146,19 @@ public class UserPortActivitiesService
 
         }else throw new UserPortActivityNotFound();
     }
-    public void forTest()
+    public void deleteAllFromUser(Long userId,Long cruiseId)
     {
-        PortActivities portActivities=new PortActivities();
-        portActivities.setImagePath("path1");
-        long id=1;
-        portActivities.setPortId(id);
-        portActivities.setUserId(id);
-        portActivities.setName("Ceva");
+        List<Long> upa = wishlistService.getIdByUserIdAndCruiseId(userId,cruiseId);
 
-        portActivitiesRepository.save(portActivities);
+        List<UserPortActivities> u=userPortActivitiesRepository.findByUserCruiseId(upa.get(0));
+        if (!u.isEmpty())
+        {
+            for (UserPortActivities i:u)
+            {
+                deleteByActivityScheduleAndCruiseId(i.getPortActivityScheduleId(),upa.get(0));
+            }
+
+        }
 
     }
 }
