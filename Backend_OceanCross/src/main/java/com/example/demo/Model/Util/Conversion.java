@@ -31,13 +31,13 @@ public class Conversion {
     }
 
     public static CruisePortDto getCruisePortDtoFromCruisePort(CruisePort cruisePort){
-        return new CruisePortDto(cruisePort.getId(), cruisePort.getPort().getName(), cruisePort.getArrival_date(), cruisePort.getArrival_time(), cruisePort.getDuration());
+        return new CruisePortDto(cruisePort.getId(), cruisePort.getPort().getId(), cruisePort.getPort().getName(), cruisePort.getArrival_date(), cruisePort.getArrival_time(), cruisePort.getDuration());
     }
 
     public static List<CruisePortDto> getCruisePortDtosFrmCruisePorts(List<CruisePort> cruisePorts){
         List<CruisePortDto> cruisePortDtos = new ArrayList<>();
         for(CruisePort cruisePort: cruisePorts){
-            CruisePortDto cruisePortDto = new CruisePortDto(cruisePort.getId(), cruisePort.getPort().getName(), cruisePort.getArrival_date(), cruisePort.getArrival_time(), cruisePort.getDuration());
+            CruisePortDto cruisePortDto = new CruisePortDto(cruisePort.getId(), cruisePort.getPort().getId(), cruisePort.getPort().getName(), cruisePort.getArrival_date(), cruisePort.getArrival_time(), cruisePort.getDuration());
             cruisePortDtos.add(cruisePortDto);
         }
         return cruisePortDtos;

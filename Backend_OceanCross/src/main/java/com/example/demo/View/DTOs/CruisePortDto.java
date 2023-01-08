@@ -13,6 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class CruisePortDto {
     private Long id;
+
+    private Long port_id;
     private String name;
     private Date arrival_date;
     private Date arrival_time;
