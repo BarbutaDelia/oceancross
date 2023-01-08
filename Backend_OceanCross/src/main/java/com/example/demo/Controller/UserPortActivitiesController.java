@@ -12,6 +12,7 @@ import com.example.demo.Model.Services.CruiseService;
 import com.example.demo.Model.Services.UserPortActivitiesService;
 import com.example.demo.Model.Services.WishlistService;
 import com.example.demo.View.DTOs.Payload.Request.UserPortActivitiesPostDto;
+import com.example.demo.View.DTOs.Payload.Request.UserPortActivitiesPostDtoList;
 import com.example.demo.View.DTOs.Payload.Response.MessageResponse;
 import com.example.demo.View.DTOs.UserPortActivityDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,38 +68,43 @@ public class UserPortActivitiesController
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> addActivityToUser( @RequestBody UserPortActivitiesPostDto param )
+    public ResponseEntity<?> addActivityToUser( @RequestBody UserPortActivitiesPostDtoList p )
     {
-        // am nevoie ca userul curent sa aiba croaziera in portul curent si in PortActivitiesSchedule sa fie inregistrata
-        //  activitatea pe care vreau sa o adaug.
-        try
-        { UserPortActivities ups=new UserPortActivities();
-
-            // iau id ul inregistrat in wish list pentru user ul curent si croaziera curenta,daca nu Exista in wishlist croaziera pt user se returneaza
-            // un cod de eroare
-
-            List<Long> id=wishlistService.getIdByUserIdAndCruiseId(param.getUserId(),param.getCruiseId());
-            if(id.isEmpty())
-            {
-                return new ResponseEntity(HttpStatus.FAILED_DEPENDENCY);
-            }
-            ups.setUserCruiseId(id.get(0));
-            // daca id ul activitatii programate in port nu exista in PortActivtySchedule se arunca o eroare
-            ups.setPortActivityScheduleId(param.getPortActivityScheduleId());
-            if(!userPortActivitiesService.checkIfExistsInPortActivitySchedule(param.getPortActivityScheduleId()))
-                throw new PortActivityScheduleNotFound(param.getUserId());
-            try {
-                userPortActivitiesService.addToUserActivity(ups);
-                return new ResponseEntity(HttpStatus.OK);
-            }catch (ActivityAlreadyExists e)
-            {
-                return new ResponseEntity(e,HttpStatus.CONFLICT);
-            }
-        }catch( PortActivityScheduleNotFound e)
+        for(UserPortActivitiesPostDto param:p.getUserPortActivitiesPostDtoList())
         {
-            return new ResponseEntity<>(e,HttpStatus.FAILED_DEPENDENCY);
-        }
+            // am nevoie ca userul curent sa aiba croaziera in portul curent si in PortActivitiesSchedule sa fie inregistrata
+            //  activitatea pe care vreau sa o adaug.
+            try {
+                UserPortActivities ups = new UserPortActivities();
 
+                // iau id ul inregistrat in wish list pentru user ul curent si croaziera curenta,daca nu Exista in wishlist croaziera pt user se returneaza
+                // un cod de eroare
+
+                List<Long> id = wishlistService.getIdByUserIdAndCruiseId(param.getUserId(), param.getCruiseId());
+                if (id.isEmpty())
+                {
+                    return new ResponseEntity(HttpStatus.FAILED_DEPENDENCY);
+                }
+                ups.setUserCruiseId(id.get(0));
+                // daca id ul activitatii programate in port nu exista in PortActivtySchedule se arunca o eroare
+                ups.setPortActivityScheduleId(param.getPortActivityScheduleId());
+                if (!userPortActivitiesService.checkIfExistsInPortActivitySchedule(param.getPortActivityScheduleId()))
+                    throw new PortActivityScheduleNotFound(param.getUserId());
+                try
+                {
+                    userPortActivitiesService.addToUserActivity(ups);
+
+                } catch (ActivityAlreadyExists e)
+                {
+                    return new ResponseEntity(e, HttpStatus.CONFLICT);
+                }
+            }
+            catch (PortActivityScheduleNotFound e)
+            {
+                return new ResponseEntity<>(e, HttpStatus.FAILED_DEPENDENCY);
+            }
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @DeleteMapping("/{port_activity_schedule_id}/{user_id}/{cruise_id}")

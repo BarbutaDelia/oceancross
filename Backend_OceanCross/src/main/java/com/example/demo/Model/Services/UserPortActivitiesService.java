@@ -96,8 +96,6 @@ public class UserPortActivitiesService
         if(userPortActivitiesRepository.findByUserCruiseIdAndPortActivityScheduleId(ups.getUserCruiseId(),ups.getPortActivityScheduleId()).isEmpty()) {
             userPortActivitiesRepository.save(ups);
         }
-        else
-            throw new ActivityAlreadyExists();
     }
     public boolean checkIfExistsInPortActivitySchedule(Long id)
     {
