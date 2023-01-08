@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 
 const routes: Routes = [
+  {path:"cruise/:id", component: AddCruiseComponent},
   {path:"add-cruise", component: AddCruiseComponent},
   {path:"card-cruise", component: CardCruiseComponent},
   {path:"cruise-details", component: CruiseComponent},

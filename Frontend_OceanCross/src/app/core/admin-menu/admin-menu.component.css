@@ -17,3 +17,6 @@ a{
 .button{
     font-size: 25px;
 }
+.mat-toolbar{
+    background-color: white;
+}

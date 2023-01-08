@@ -1,7 +1,51 @@
 .form-activities{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 .button{
     height: 50px;
+    font-weight: 30px;
+    font-size: 25px;
+}
+.activities-table{
+    width: 100%;
+
+}
+.form-ports{
+    display: flex;
+    justify-content: space-between;
+}
+.ports-table{
+    width: 100%;
+
+}
+table{
+    width: 100%;
+}
+th, td {
+    border:1px solid black;
+    text-align: center;
+    color: black;
+    background-color: transparent;
+  }
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+    color: black;
+    background-color: transparent;
+ }
+ .white{
+    color: black;
+ }
+.buttons{
+    display:flex;
+    justify-content: space-between;
+    text-align: center;
+}
+.buttons-table{
+    display:flex;
+    justify-content: center;  
+}
+.buttons-td{
+    width:200px;
 }

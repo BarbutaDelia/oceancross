@@ -10,6 +10,6 @@
     </div>
     <div class="button-card-admin" *ngIf="localStorageService.connectedUser?.role ==='admin'">
         <button mat-raised-button color="warn"  (click)="updateCruise()" >Modify</button> 
-        <button mat-raised-button color="warn"  (click)="deleteCruise()" >Delete </button> 
+        <button mat-raised-button color="warn"  (click)="deleteCruise(cruise)" >Delete </button> 
     </div>
 </div>

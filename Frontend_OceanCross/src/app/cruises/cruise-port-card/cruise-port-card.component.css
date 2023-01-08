@@ -1,0 +1,24 @@
+.ports{
+    align-items:center;
+    flex-direction: column; 
+    flex-wrap:wrap;
+    display:flex;
+    height: 21rem; 
+    margin-top: 2rem; 
+    margin-left: -3.1rem; 
+    border-right:solid blue; 
+    border-bottom:solid blue; 
+    border-top:solid blue; 
+    background-color: white;
+    width: 600px;
+}
+.all-card{
+    display: flex;
+    flex-direction: row
+}
+.card{
+    display: flex;
+    flex-direction: row;
+    margin-top: 32px;
+    height: 336px;
+}

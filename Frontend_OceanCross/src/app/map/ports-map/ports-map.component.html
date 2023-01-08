@@ -1,0 +1,17 @@
+<div class="map-port">
+  <div>
+    <google-map height="540px"
+    width="750px"
+    [center]="center"
+    [zoom]="zoom">
+    <ng-container  *ngFor="let markerPosition of markerPositions">
+      <map-marker #marker="mapMarker"  [position]="markerPosition.coordinate" (mapClick)="openInfoWindow(marker, infoWindow)"></map-marker>
+      <map-info-window #infoWindow="mapInfoWindow"> Port Name: {{markerPosition.portName}} </map-info-window>
+    </ng-container >
+</google-map>
+
+</div>
+
+
+
+

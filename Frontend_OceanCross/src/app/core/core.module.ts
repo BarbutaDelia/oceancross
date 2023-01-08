@@ -10,6 +10,7 @@ import { AuthService } from '../auth/services/auth.service';
 import { SnackBarMessageService } from '../shared/services/snack-bar-message.service';
 import { CruisesService } from '../cruises/services/cruises-service.service';
 import { LocalStorageService } from '../shared/services/local-storage.service';
+import { PortsService } from '../ports/services/ports.services';
 
 @NgModule({
   declarations: [ 
@@ -18,9 +19,9 @@ import { LocalStorageService } from '../shared/services/local-storage.service';
   imports: [
     CommonModule,
     CoreRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   exports: [AdminMenuComponent,UserMenuComponent,UserAuthMenuComponent ],
-  providers:[ AuthService, CruisesService,SnackBarMessageService, LocalStorageService ],
+  providers:[ AuthService, CruisesService,SnackBarMessageService, LocalStorageService, PortsService ],
 })
 export class CoreModule { }

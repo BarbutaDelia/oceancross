@@ -18,8 +18,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material/snack-bar';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
+import { MapModule } from '../map/map.module';
+import { GoogleMapsModule } from '@angular/google-maps';
 
-const modules = [MatButtonModule, MatTableModule, MatSortModule, MatToolbarModule, 
+const modules = [MatButtonModule, 
+                  MatTableModule, 
+                  MatSortModule, 
+                  MatToolbarModule, 
                   DragDropModule, 
                   MatDatepickerModule, 
                   ReactiveFormsModule, 
@@ -33,7 +38,10 @@ const modules = [MatButtonModule, MatTableModule, MatSortModule, MatToolbarModul
                   MatSlideToggleModule,
                   MatSelectModule,
                   MatDialogModule,
-                  FormsModule];
+                  FormsModule,
+                  MapModule,
+                  GoogleMapsModule
+                ];
 @NgModule({
   declarations: [
     SnackBarComponent

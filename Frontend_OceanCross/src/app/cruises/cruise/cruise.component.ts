@@ -22,7 +22,6 @@ export class CruiseComponent implements OnInit {
 
   public dataSourceActivities = new MatTableDataSource([]);
   public dataSourcePorts = new MatTableDataSource([])
-  clickedRows = new Set<ICruisePorts>();
   
   @ViewChild('TableActivities') TableActivities = new MatSort();
   @ViewChild('TablePorts') TablePorts = new MatSort();

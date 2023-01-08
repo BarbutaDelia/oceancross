@@ -1,35 +1,50 @@
-<div class="title-port">
-    ADD A PORT 
-  </div><br>
+<div class="title-port" *ngIf="data.page_type"> ADD A CRUISE PORT</div><br>
+<div class="title-port" *ngIf="!data.page_type"> MODIFY A CRUISE PORT</div><br>
 <div mat-dialog-content class="add-port">
-    <div class="input-data">
-        <label>Port name: </label>
-        <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.portName">
-        </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Select port</mat-label>
+        <mat-select [formControl]="portControl">
+            <mat-option *ngFor="let port of ports" [value]="port">  {{port.name}} </mat-option>
+        </mat-select>
+    </mat-form-field>
+        <div class="input-data">
+        <mat-form-field class="mat-form-field">
+            <mat-label>Arrival date: </mat-label>
+                <input
+                class="pointer"
+                readonly
+                matInput
+                [matDatepicker]="startPicker"
+                (click)="startPicker.open()"
+                [min]="data.start_date"
+                [max]="data.end_date"
+                [formControl]="dateControl"/>
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="startPicker"
+                matTooltip="Change date"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>   
     </div>
-    <div class="input-data">
-        <label>Arrival date: </label>
-        <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.arrivalDate">
-        </mat-form-field>
-        
-    </div>
+
     <div class="input-data">
         <label>Arrival Time: </label>
         <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.arrivalTime">
-        </mat-form-field>
-        
+            <input type="time"   step="1" matInput [(ngModel)]="data.cruisePort.arrival_time">
+        </mat-form-field> 
     </div>
+
     <div class="input-data">
         <label>Duration : </label>
         <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.duration">
+            <input type="number" matInput [(ngModel)]="data.cruisePort.duration">
         </mat-form-field>
     </div>
+
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" color="warn">CLOSE</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="warn">SAVE</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="warn" *ngIf="data.page_type">ADD</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="warn" *ngIf="!data.page_type">MODIFY</button>
 </div>

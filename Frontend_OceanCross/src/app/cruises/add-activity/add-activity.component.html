@@ -1,41 +1,59 @@
-<div class="title-port">
-    ADD AN ACTIVITY 
-  </div><br>
+<div class="title-port" *ngIf="info.page_type">  ADD AN ACTIVITY </div><br>
+<div class="title-port" *ngIf="!info.page_type">  MODIFY AN ACTIVITY </div><br>
 <div mat-dialog-content class="add-port">
     <div class="input-data">
         <label>Activity name: </label>
         <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.activityName">
+        <input matInput [(ngModel)]="info.onBoardActivity.name">
         </mat-form-field>
     </div>
-    <div class="input-data">
-        <label>Start date: </label>
-        <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.startDate">
-        </mat-form-field>
         
+    <div class="input-data">
+        <mat-form-field class="mat-form-field">
+            <mat-label>Start date:  </mat-label>
+            <input
+                class="pointer"
+                readonly
+                matInput
+                [matDatepicker]="startPicker"
+                (click)="startPicker.open()"
+                [min]="info.start_date"
+                [max]="info.end_date"
+                [formControl]="dateControl"
+            />
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="startPicker"
+                matTooltip="Change date"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>   
     </div>
+
     <div class="input-data">
         <label>Start Time: </label>
         <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.startTime">
+            <input type="time"  step="1" matInput [(ngModel)]="info.onBoardActivity.start_time">
         </mat-form-field>
         
     </div>
+
     <div class="input-data">
         <label>Duration : </label>
         <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.duration">
+            <input type="number" matInput [(ngModel)]="info.onBoardActivity.duration">
         </mat-form-field>
     </div>
+
     <div class="input-data">
         <label>Location : </label>
-        <mat-form-field appearance="fill">
-        <input matInput [(ngModel)]="data.location">
+            <mat-form-field appearance="fill">
+        <input  matInput [(ngModel)]="info.onBoardActivity.location">
         </mat-form-field>
     </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" color="warn">CLOSE</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial color="warn">SAVE</button>
+  <button mat-button [mat-dialog-close]="info" cdkFocusInitial color="warn" *ngIf="info.page_type">ADD</button>
+  <button mat-button [mat-dialog-close]="info" cdkFocusInitial color="warn" *ngIf="!info.page_type">MODIFY</button>
 </div>

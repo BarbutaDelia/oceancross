@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AddPortComponent } from './add-port/add-port.component';
 import { PortsComponent } from './ports/ports.component';
 import { PortsDropdownComponent } from './ports-dropdown/ports-dropdown.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { PortsDropdownComponent } from './ports-dropdown/ports-dropdown.componen
   imports: [
     CommonModule,
     PortsRoutingModule,
-    SharedModule
+    SharedModule,
+    GoogleMapsModule
   ],
   exports :[PortsComponent, PortsDropdownComponent]
 })

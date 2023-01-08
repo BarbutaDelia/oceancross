@@ -1,11 +1,11 @@
 import { ICruisePorts } from "./cruisePorts.interface";
 import { IOnboardActivities } from "./onboardActivities.interface";
 
-export interface ICruise{
-    id?: number,
+export interface ICruiseRequest{
+    id: number,
     name: string,
-    start_date: Date,
-    end_date:Date,
+    start_date: string,
+    end_date:string,
     price: number,
     onboardActivities: IOnboardActivities[],
     cruisePorts: ICruisePorts[]

@@ -1,5 +1,17 @@
-<div>
-    <div *ngFor="let cruise of cruisesFilter">
+<div class="background-image">
+    <div class="pagination-and-search">
+        <input
+        class="search-label"
+        placeholder="Search"
+        aria-label="Search"
+        type="search"
+        [(ngModel)]="filter"/>
+
+        <pagination-controls (pageChange)="onPageChange($event)" id="first">
+        </pagination-controls>
+    </div>
+    <div *ngFor="let cruise of cruisesFilter | paginate
+    : { itemsPerPage: itemsPerPage,  currentPage: cruisesPage, id: 'first' }" >
         <app-cruise-port-card [cruise]="cruise"> </app-cruise-port-card>
    </div>
 </div>

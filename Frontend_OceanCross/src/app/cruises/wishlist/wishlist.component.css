@@ -1,0 +1,34 @@
+.background-image{
+    width: 99%;
+    height: 90%;
+    position: absolute; 
+    background-color: #619ac7;
+}
+.search-label{
+    color: red;
+    background-color: white;
+    height:36px;
+    width:440px; 
+    margin-left:48px; 
+    margin-right:48px;
+    margin-top: 32px;
+    font-size: 15px;
+}
+.pagination-and-search{
+    display: flex;
+    justify-content: center;align-items: center;right: -50px;
+}
+#first{
+    position: relative;
+    bottom: -20px;
+}
+.title{
+    margin:40px;
+}
+.button-style{
+    margin:0.5rem
+}
+
+.page{
+    display: flex;
+}

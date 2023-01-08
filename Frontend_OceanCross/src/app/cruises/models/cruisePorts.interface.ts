@@ -1,7 +1,10 @@
+import { Time } from "@angular/common"
+
 export interface ICruisePorts{
     id: number,
-    name:string
-    arrival_date:Date,
-    arrival_end:Date,
+    name:string,
+    port_id:number,
+    arrival_date:string,
+    arrival_time:Time,
     duration:number
 }

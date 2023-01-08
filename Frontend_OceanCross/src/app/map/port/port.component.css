@@ -1,0 +1,29 @@
+.title-port{
+    color: #f35334;
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+}
+.label-port{
+    font-size: 30px;
+    font-weight: 700;
+}
+.map-port{
+    display: flex;
+    align-self:center;
+}
+.input-port{
+  height: 30px;
+  width: 590px;
+  font-size: 20px;
+}
+.button{
+    text-align: center;
+    height: 50px;
+    font-weight: 200;
+    font-size: 25px;
+}
+.buttons{
+    display: flex;
+    justify-content: space-around;
+}

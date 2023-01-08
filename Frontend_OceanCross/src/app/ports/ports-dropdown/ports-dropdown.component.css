@@ -5,3 +5,41 @@
 .button{
     height: 50px;
 }
+.ports-table{
+    width: 100%;
+
+}
+table{
+    width: 100%;
+}
+th, td {
+    border:1px solid black;
+    text-align: center;
+    color: black;
+    background-color: transparent;
+  }
+:host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+    color: black;
+    background-color: transparent;
+ }
+ .white{
+    color: black;
+ }
+.buttons{
+    display:flex;
+    justify-content: space-between;
+    text-align: center;
+}
+.button{
+    font-size: 25px;
+}
+
+.buttons-table{
+    display:flex;
+    justify-content: center;  
+}
+.buttons-td{
+    width:200px;
+}

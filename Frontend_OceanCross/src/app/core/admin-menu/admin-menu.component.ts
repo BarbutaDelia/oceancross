@@ -10,7 +10,7 @@ import { LocalStorageService } from 'src/app/shared/services/local-storage.servi
 })
 export class AdminMenuComponent implements OnInit {
 
-  constructor(private localStorageService:LocalStorageService) { }
+  constructor(private router: Router, private localStorageService:LocalStorageService) { }
 
   ngOnInit(): void {
   }
@@ -24,5 +24,6 @@ export class AdminMenuComponent implements OnInit {
     }
     localStorage.setItem("data", JSON.stringify(dataStorage))
     this.localStorageService.changeData(JSON.parse(localStorage.getItem("data")))
+    this.router.navigateByUrl('/');
   }
 }

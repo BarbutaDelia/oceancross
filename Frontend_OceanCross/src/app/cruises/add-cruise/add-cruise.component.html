@@ -1,61 +1,113 @@
-<div class="title-cruise">
-    ADD A CRUISE 
+<div class="format">
+  <div class="cruise">
+    <div class="title-cruise" *ngIf="pageType"> ADD A CRUISE </div>
+    <div class="title-cruise" *ngIf="!pageType"> MODIFY A CRUISE </div>
   </div>
   <form [formGroup]="addCruiseForm" class="formular">
-  
-      <div>
-        <label for="name"> Cruise name: </label>
-        <input id="name" type="text" formControlName="name">
-      </div>
-  
-      <mat-form-field style="width: 100%">
-        <mat-label>Start date: </mat-label>
-        <input
-            class="pointer"
-            readonly
-            matInput
-            [matDatepicker]="startPicker"
-            formControlName="startDate"
-            (click)="startPicker.open()"
-        />
-        <mat-datepicker-toggle
-            matSuffix
-            [for]="startPicker"
-            matTooltip="Change date"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #startPicker></mat-datepicker>
-    </mat-form-field>
-  
-    <mat-form-field style="width: 100%">
-        <mat-label>End date: </mat-label>
-        <input
-            class="pointer"
-            matInput
-            readonly
-            [matDatepicker]="endPicker"
-            formControlName="endDate"
-            (click)="endPicker.open()"
-            [min]="startDateSprint"
-        />
-        <mat-datepicker-toggle
-            matSuffix
-            [for]="endPicker"
-            matTooltip="Change date"
-            min="startDate"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #endPicker></mat-datepicker>
-    </mat-form-field>
-  
-    <div>
-      <label for="price">
-        Price: 
-      </label>
-      <input id="price" type="text" formControlName="price">
-    </div>
-    
-    <app-ports-dropdown></app-ports-dropdown>
-    
-    <app-form-cruise-activity></app-form-cruise-activity>
+    <div class="map-formular">
+      <div class="formular-sus">
+        <div>
+          <label for="name"> Cruise name: </label>
+          <input id="name" type="text" formControlName="name" [value]="cruise.name">
+        </div>
+        <div class="data-picker-div">
+          <mat-form-field class="mat-form-field">
+            <div>
+              
+            </div>
+            <mat-label>Start date: </mat-label>
+            <div *ngIf="pageType">
+              <input
+              class="pointer"
+              readonly
+              matInput
+              [matDatepicker]="startPicker"
+              formControlName="startDate"
+              (click)="startPicker.open()"
+              [min]="today"
+          />
+            </div>
+            <div *ngIf="!pageType">
+              <input
+              class="pointer"
+              readonly
+              matInput
+              [matDatepicker]="startPicker"
+              formControlName="startDate"
+              (click)="startPicker.open()"
+              [min]="today"
+              [value]="cruise.start_date"
+          />
+            </div>
+           
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="startPicker"
+                matTooltip="Change date"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
       
-    <button mat-raised-button color="warn"  type="submit" (click)="onSubmit()">Add Cruise</button>
-    </form>
+        <mat-form-field class="mat-form-field">
+            <mat-label>End date: </mat-label>
+            <div *ngIf="!pageType">
+              <input
+              class="pointer"
+              matInput
+              readonly
+              [matDatepicker]="endPicker"
+              formControlName="endDate"
+              (click)="endPicker.open()"
+              [min]="startDateSprint"
+              [value]="cruise.end_date"
+          />
+            </div>
+            <div *ngIf="pageType">
+              <input
+              class="pointer"
+              matInput
+              readonly
+              [matDatepicker]="endPicker"
+              formControlName="endDate"
+              (click)="endPicker.open()"
+              [min]="startDateSprint"
+              
+          />
+            </div>
+           
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="endPicker"
+                matTooltip="Change date"
+                min="startDate"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>  
+        </div>
+        
+        <div>
+          <label for="price"> Price: </label>
+          <div *ngIf="pageType">
+            <input id="price" type="number" formControlName="price">
+          </div>
+          <div *ngIf="!pageType">
+            <input id="price" type="number" formControlName="price" [value]="cruise.price">
+          </div>
+         
+        </div>
+      </div>
+      <app-ports-map></app-ports-map>
+    </div>
+    <br>
+
+    <app-ports-dropdown [cruise]="cruise" [isComplet]="checkFirstForm()"></app-ports-dropdown>
+    <app-form-cruise-activity [cruise]="cruise" [isComplet]="checkFirstForm()"></app-form-cruise-activity><br>
+    <div class="buttons">
+      <button mat-raised-button color="warn"  type="submit" (click)="saveCruise()" *ngIf="pageType" class="button">Save Cruise</button>
+      <div *ngIf="!pageType">
+        <button mat-raised-button color="warn"  type="submit" (click)="updateCruise()" *ngIf="!pageType" class="button">Modify Cruise</button>
+      </div>
+    </div><br>
+  </form>
+</div>
+<br>

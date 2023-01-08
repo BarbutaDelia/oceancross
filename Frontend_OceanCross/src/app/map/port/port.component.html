@@ -1,0 +1,26 @@
+<div class="title-port">ADD A PORT: </div><br>
+<div class="map-port">
+  <div>
+    <google-map height="400px"
+    width="750px"
+    [center]="center"
+    [zoom]="zoom"
+    (mapClick)="addMarker($event)">
+    <map-marker #marker="mapMarker" [position]="markerPositions"></map-marker>
+    </google-map><br>
+
+    <div class="input-data">
+    <label class="label-port">Port name: </label>
+    <input  type = "text" class ="input-port" [(ngModel)]="portName"> <br><br>
+    </div>
+    <div class="buttons">
+      <button mat-button color="warn"  class="button" (click)="onNoClick()">Close</button>
+      <button mat-button color="warn"  class="button" cdkFocusInitial  (click)="onSubmit()">Save port</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+
