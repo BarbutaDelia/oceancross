@@ -9,6 +9,7 @@ import com.example.demo.Model.Services.CruiseService;
 import com.example.demo.Model.Services.WishlistService;
 import com.example.demo.Model.Util.Conversion;
 import com.example.demo.View.DTOs.CruiseDto;
+import com.example.demo.View.DTOs.Payload.Request.WishlistPostDto;
 import com.example.demo.View.DTOs.Payload.Response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,14 +20,13 @@ import org.springframework.web.servlet.function.EntityResponse;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/wishlist")
+@RequestMapping("api/wishlist")
 public class WishlistController
 {
     @Autowired
     UserCruiseRepository userCruisesRepository;
     @Autowired
     CruiseService cruiseService;
-
 
     @Autowired
     WishlistService wishlistService;
@@ -59,26 +59,26 @@ public class WishlistController
         }
     }
 
-    @PostMapping("/{user_id}/{cruise_id}")
-    public ResponseEntity<?> addCruiseToWishlist(@PathVariable Long user_id,@PathVariable Long cruise_id)
+    @PostMapping("/")
+    public ResponseEntity<?> addCruiseToWishlist(@RequestBody WishlistPostDto param)
     {
 
-            if(wishlistService.checkIfExists(user_id,cruise_id))
-            {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Error: The cruise is already in wishlist"));
-            }
-            else
-            {
-                UserCruises userCruise=new UserCruises();
-                userCruise.setUserId(user_id);
-                userCruise.setCruiseId(cruise_id);
-                userCruisesRepository.save(userCruise);
-                return ResponseEntity.ok(new MessageResponse("Cruise added to current user wishlist"));
-            }
-
+        if(wishlistService.checkIfExists(param.getUserId(),param.getCruiseId()))
+        {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: The cruise is already in wishlist"));
         }
+        else
+        {
+            UserCruises userCruise=new UserCruises();
+            userCruise.setUserId(param.getUserId());
+            userCruise.setCruiseId(param.getCruiseId());
+            userCruisesRepository.save(userCruise);
+            return ResponseEntity.ok(new MessageResponse("Cruise added to current user wishlist"));
+        }
+
+    }
 
 
 

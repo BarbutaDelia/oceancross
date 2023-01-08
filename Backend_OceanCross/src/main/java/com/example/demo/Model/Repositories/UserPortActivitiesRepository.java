@@ -14,4 +14,7 @@ public interface UserPortActivitiesRepository extends JpaRepository<UserPortActi
     //@Query("Select * FROM user_activities a where a.user_cruise_id IN ( :userCruiseIds)")
     //  public List<UserPortActivities> findActivitiesByIds(@Param("ids") List<Long> ids);
    //List<UserPortActivities> findByUserCruiseIds(List<Long> userCruiseIds);
+    public List<UserPortActivities> findByUserCruiseIdAndPortActivityScheduleId(Long cruiseId,Long portActivityScheduleId);
+    public void deleteByUserCruiseIdAndPortActivityScheduleId(Long cruiseId,Long portActivityScheduleId);
+
 }
