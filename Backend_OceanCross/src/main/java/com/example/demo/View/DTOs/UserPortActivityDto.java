@@ -17,9 +17,9 @@ public class UserPortActivityDto
 {
     Long userID;
     Long cruiseID;
-
     Long portID;
-   List<PortActivitiesSchedule> allPortActivities;
+    List<PortActivitiesSchedule> allPortActivities;
 
-   List<UserPortActivities> userPortActivities;
+    // defapt aici o sa am tot PortActivitiesSchedule
+    List<PortActivitiesSchedule> userPortActivities;
 }
