@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.AccessType;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,12 +23,18 @@ public class WishlistService {
     }
     public List<Long> listCurrentUserWishlist(Long id)
     {
-        if(userCruiseRepository.findIdByUserId(id).isEmpty())
+        if(userCruiseRepository.findByUserId(id).isEmpty())
         {
             throw new UserCruisesNotFound(id);
         }else
         {
-            return userCruiseRepository.findIdByUserId(id);
+            List<UserCruises> uc= userCruiseRepository.findByUserId(id);
+            List<Long> returnList=new ArrayList<>();
+            for (UserCruises c:uc)
+            {
+                returnList.add((c.getCruiseId()));
+            }
+            return returnList;
         }
     }
     public List<Long> getIdByUserIdAndCruiseId(Long uid, Long cid)

@@ -13,6 +13,7 @@ public interface UserCruiseRepository extends JpaRepository<UserCruises, Long>
     @Query("SELECT uc.id FROM UserCruises uc WHERE uc.userId = :userId")
     List<Long> findIdByUserId(Long userId);
 
+    List<UserCruises> findByUserId(Long userId);
     @Query("SELECT uc.id FROM UserCruises uc WHERE uc.userId = :userId AND uc.cruiseId = :cruiseId")
     List<Long> findIdByUserIdAndCruiseId(Long userId, Long cruiseId);
 }

@@ -82,6 +82,7 @@ public class CruiseService {
     }
     public List<Cruise> listSpecifiedCruises(List<Long> ids)
     {
+        // caut croazierele cu id urile primite
         if(!cruiseRepository.findCruisesByIds(ids).isEmpty())
         {
             return cruiseRepository.findCruisesByIds(ids);

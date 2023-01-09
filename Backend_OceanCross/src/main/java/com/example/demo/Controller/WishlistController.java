@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 
 import com.example.demo.Model.Entities.Cruise;
 import com.example.demo.Model.Entities.UserCruises;
+import com.example.demo.Model.Exceptions.Cruises.CollectionOfCruisesNotFound;
 import com.example.demo.Model.Exceptions.Wishlist.UserCruisesNotFound;
 import com.example.demo.Model.Repositories.UserCruiseRepository;
 import com.example.demo.Model.Services.CruiseService;
@@ -48,12 +49,19 @@ public class WishlistController
     {
         try
         {
+            // iau idurile inregistrarilor din user cruises corespunzatoare userului curent
             List<Long> userCruisesIds=wishlistService.listCurrentUserWishlist(user_id);
+            // iau din cruises crozierele cu id urile de mai sus
             List<Cruise> cruises =cruiseService.listSpecifiedCruises(userCruisesIds);
+
             List<CruiseDto> cruiseDtos =Conversion.getCruiseDtosFromCruises(cruises);
             return new ResponseEntity<>(cruiseDtos, HttpStatus.OK);
         }
         catch (UserCruisesNotFound e)
+        {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+        catch (CollectionOfCruisesNotFound e)
         {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
