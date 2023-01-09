@@ -1,11 +1,12 @@
 <div class="background-image">
+    <br>
     <div class="wrapper" >
         <div class="center" >
             <h1>{{cruise?.name}}</h1>
-            <h2 class="white">{{cruise?.start_date}} -> {{cruise?.end_date}}</h2>
+            <h2 class="black">{{cruise?.start_date}} -> {{cruise?.end_date}}</h2>
         </div>
         
-        <p class="white">In order to keep the passengers entertained throughout the journey, we provide a variety of activities that you can attend on board</p>
+        <p class="black">In order to keep the passengers entertained throughout the journey, we provide a variety of activities that you can attend on board</p>
         
         <div>
             <table mat-table [dataSource]="dataSourceActivities" class="mat-elevation-z8 demo-table" matSort #TableActivities="matSort">
@@ -68,9 +69,10 @@
         </div>
         <div class="button" *ngIf="localStorageService.connectedUser?.username!==''">
             <p class="white"> Price for this cruise: {{cruise?.price}}$</p>
-            <button mat-raised-button  color="warn">Add cruise to wishlist</button> 
+            <button mat-raised-button  color="warn">Add cruise to wishlist</button> <br><br>
         </div>
         
     </div>
     
 </div>
+<br>

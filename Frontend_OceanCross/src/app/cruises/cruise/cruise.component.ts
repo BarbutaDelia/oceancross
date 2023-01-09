@@ -4,7 +4,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ICruise } from '../models/cruise.interface';
 import { CruisesService } from '../services/cruises-service.service';
 import { ActivatedRoute } from '@angular/router';
-import { ICruisePorts } from '../models/cruisePorts.interface';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
 @Component({
