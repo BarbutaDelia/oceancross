@@ -4,6 +4,7 @@ import com.example.demo.Model.Entities.Port;
 import com.example.demo.Model.Entities.PortActivities;
 import com.example.demo.Model.Entities.User;
 import com.example.demo.Model.Exceptions.Ports.CollectionOfPortsNotFound;
+import com.example.demo.Model.Exceptions.Ports.PortNotFound;
 import com.example.demo.Model.Repositories.PortActivitiesRepository;
 import com.example.demo.Model.Repositories.PortRepository;
 import com.example.demo.Model.Repositories.UserRepository;
@@ -110,6 +111,18 @@ public class PortController {
         }catch(Exception e)
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping("/{port_id}")
+    public ResponseEntity<?>getPortById(@PathVariable Long port_id)
+    {
+        try {
+            Port p=portService.getPort(port_id);
+            return new ResponseEntity<>(p,HttpStatus.OK);
+        }
+        catch (PortNotFound e)
+        {
+            return  new ResponseEntity<>(e,HttpStatus.NOT_FOUND);
         }
     }
 }
