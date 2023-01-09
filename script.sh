@@ -13,6 +13,9 @@ if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
   # Perform pull and get the latest code
   git pull
 
+  # Execute permission over script
+  chmod +x script.sh
+
   # Start the two systemd services again
   sudo systemctl start proiectPAWBackend.service
   #systemctl start proiectPAWFrontend.service
