@@ -1,0 +1,14 @@
+[Unit]
+Description=Update service
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/PAW/proiect-paw-tadam/script.sh
+#[Timer]
+#OnUnitActiveSec=1h
+
+[Install]
+WantedBy=timers.target
+
+[Install]
+WantedBy=multi-user.target
