@@ -245,7 +245,9 @@ public class CruiseController {
             {
                 if(cp.getPort().getId()==port_id)
                 {
-                    return new ResponseEntity<>(cp,HttpStatus.OK);
+                    Port p=portService.getPort(port_id);
+                    CruisePortDto cruisePortDto=new CruisePortDto(cp.getId(),port_id,p.getName(),cp.getArrival_date(),cp.getArrival_time(),cp.getDuration());
+                    return new ResponseEntity<>(cruisePortDto,HttpStatus.OK);
                 }
             }
             //   CruisePort cruisePort = cruiseService.getCruisePort(port_id);
