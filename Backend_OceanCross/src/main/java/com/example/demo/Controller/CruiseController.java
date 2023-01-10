@@ -8,6 +8,7 @@ import com.example.demo.Model.Exceptions.Cruises.CollectionOfCruisesNotFound;
 import com.example.demo.Model.Exceptions.Cruises.CruiseNotFound;
 import com.example.demo.Model.Exceptions.Cruises.CruisePortNotFound;
 import com.example.demo.Model.Exceptions.OnboardActivities.OnboardActivityNotFound;
+import com.example.demo.Model.Exceptions.Ports.PortNotFound;
 import com.example.demo.Model.Repositories.CruisePortsRepository;
 import com.example.demo.Model.Repositories.CruiseRepository;
 import com.example.demo.Model.Repositories.OnBoardActivityRepository;
@@ -232,6 +233,33 @@ public class CruiseController {
     @DeleteMapping("/{cruise_id}/users/{user_id}/port/{port_id}/activities")
     public ResponseEntity<?> deleteAllPortActivitiesForUser(@PathVariable Integer cruise_id, @PathVariable Integer user_id, @PathVariable Integer port_id) {
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{cruise_id}/port/{port_id}")
+    public ResponseEntity<?> getPortCruiseByCruiseIdAndPortId(@PathVariable Long port_id,@PathVariable Long cruise_id)
+    {
+        try {
+            Cruise cruise=cruiseService.getCruise(cruise_id);
+            List<CruisePort> cruisePorts=cruise.getCruisePorts();
+            for (CruisePort cp:cruisePorts)
+            {
+                if(cp.getPort().getId()==port_id)
+                {
+                    return new ResponseEntity<>(cp,HttpStatus.OK);
+                }
+            }
+            //   CruisePort cruisePort = cruiseService.getCruisePort(port_id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(PortNotFound e)
+        {
+            return   new ResponseEntity<>(e,HttpStatus.NOT_FOUND);
+        }
+        catch (CruiseNotFound e)
+        {
+            return  new ResponseEntity<>(e,HttpStatus.NOT_FOUND);
+        }
+
     }
 
     //nu e asa -- facem diferenta pe frontend si trimiterm cereri de post si delete
