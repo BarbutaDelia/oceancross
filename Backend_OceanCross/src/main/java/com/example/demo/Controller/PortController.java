@@ -1,14 +1,16 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.Entities.DecodedMultipartFile;
 import com.example.demo.Model.Entities.Port;
 import com.example.demo.Model.Entities.PortActivities;
 import com.example.demo.Model.Entities.User;
 import com.example.demo.Model.Exceptions.Ports.CollectionOfPortsNotFound;
-import com.example.demo.Model.Exceptions.Ports.PortNotFound;
 import com.example.demo.Model.Repositories.PortActivitiesRepository;
 import com.example.demo.Model.Repositories.PortRepository;
 import com.example.demo.Model.Repositories.UserRepository;
+import com.example.demo.Model.Services.FileStorageService;
 import com.example.demo.Model.Services.PortService;
+import com.example.demo.Model.Util.FileUploadUtil;
 import com.example.demo.View.DTOs.Payload.Request.AddPortRequest;
 import com.example.demo.View.DTOs.Payload.Request.DeletePortActivityRequest;
 import com.example.demo.View.DTOs.Payload.Request.PortActivityRequest;
@@ -16,9 +18,17 @@ import com.example.demo.View.DTOs.Payload.Response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -33,6 +43,9 @@ public class PortController {
 
     @Autowired
     private PortActivitiesRepository portActivitiesRepository;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
 
     @GetMapping("")
@@ -78,7 +91,8 @@ public class PortController {
 
     @PostMapping("/{port_name}/users/{user_id}/activities")
     public ResponseEntity<?> addPortActivities(@PathVariable String port_name, @PathVariable Long user_id,
-                                               @Valid @RequestBody PortActivityRequest portActivityRequest) {
+                                               @Valid @RequestBody PortActivityRequest portActivityRequest)
+    {
 
         if (portRepository.findByName(port_name) != null)
         {
@@ -88,10 +102,18 @@ public class PortController {
             portActivity.setUserId(user_id);
             portActivity.setPortId(port.getId());
             portActivity.setName(portActivityRequest.getName());
-            portActivity.setImagePath(portActivityRequest.getImage_path());
+
+
+            byte[] image = Base64.getDecoder().decode(portActivityRequest.getImage());
+            DecodedMultipartFile file = new DecodedMultipartFile(image);
+            String fileName = fileStorageService.storeFile(file, portActivityRequest.getImage_name());
+
+            String location = System.getProperty("user.dir") + "\\uploads";
+            System.out.println(location);
+            System.out.println("calea catre imagine: " + "uploads/files/"+fileName);
+            portActivity.setImagePath("uploads/files/"+fileName);
             portActivitiesRepository.save(portActivity);
 
-            //aici trebuie sa schimbi, nu iti returneaza un singur rezultat cum ar trebui
             return ResponseEntity.ok(portActivitiesRepository.findByName(portActivity.getName()).getId());
         }
         else
@@ -111,18 +133,6 @@ public class PortController {
         }catch(Exception e)
         {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-    @GetMapping("/{port_id}")
-    public ResponseEntity<?>getPortById(@PathVariable Long port_id)
-    {
-        try {
-            Port p=portService.getPort(port_id);
-            return new ResponseEntity<>(p,HttpStatus.OK);
-        }
-        catch (PortNotFound e)
-        {
-            return  new ResponseEntity<>(e,HttpStatus.NOT_FOUND);
         }
     }
 }

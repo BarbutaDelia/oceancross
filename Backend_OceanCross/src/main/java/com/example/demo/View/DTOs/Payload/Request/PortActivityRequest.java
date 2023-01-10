@@ -9,5 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class PortActivityRequest {
     private String name;
-    private String image_path;
+    private String image_name;
+    private String image;
 }
