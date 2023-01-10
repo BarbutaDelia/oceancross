@@ -13,13 +13,5 @@ public class ResourceWebConfig implements WebMvcConfigurer {
         this.environment = environment;
     }
 
-    @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        //String location = environment.getProperty("app.file.storage.mapping");
 
-        String location = System.getProperty("user.dir") + "\\uploads\\files\\";
-        //registry.addResourceHandler("/uploads/**").addResourceLocations(location);
-        //TODO de vazut caile
-        registry.addResourceHandler("/uploads/files/**").addResourceLocations(location);
-    }
 }

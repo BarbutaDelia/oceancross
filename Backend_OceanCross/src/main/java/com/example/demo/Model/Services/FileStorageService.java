@@ -18,7 +18,7 @@ public class FileStorageService {
 
     @Autowired
     public FileStorageService(Environment env) {
-        this.fileStorageLocation = Paths.get(env.getProperty("app.file.upload-dir", "./uploads/files"))
+        this.fileStorageLocation = Paths.get(env.getProperty("app.file.upload-dir", "./src/main/resources/META-INF/resources"))
                 .toAbsolutePath().normalize();
 
         try {

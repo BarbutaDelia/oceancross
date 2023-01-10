@@ -108,10 +108,7 @@ public class PortController {
             DecodedMultipartFile file = new DecodedMultipartFile(image);
             String fileName = fileStorageService.storeFile(file, portActivityRequest.getImage_name());
 
-            String location = System.getProperty("user.dir") + "\\uploads";
-            System.out.println(location);
-            System.out.println("calea catre imagine: " + "uploads/files/"+fileName);
-            portActivity.setImagePath("uploads/files/"+fileName);
+            portActivity.setImagePath(fileName);
             portActivitiesRepository.save(portActivity);
 
             return ResponseEntity.ok(portActivitiesRepository.findByName(portActivity.getName()).getId());
