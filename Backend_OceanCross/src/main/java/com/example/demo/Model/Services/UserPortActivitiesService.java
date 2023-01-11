@@ -30,6 +30,7 @@ public class UserPortActivitiesService
     CruiseService cruiseService;
     @Autowired
     WishlistService wishlistService;
+
     public List<UserPortActivities> getCurrentUserActivities(List<Long> cuid)
     {
         List<UserPortActivities>   userPortActivities=new ArrayList<>();
@@ -161,4 +162,11 @@ public class UserPortActivitiesService
         }
 
     }
+
+    public PortActivities getPortActivityById(Long id)
+    {
+        return portActivitiesRepository.findPortById(id);
+    }
+
+
 }

@@ -10,6 +10,7 @@ import com.example.demo.View.DTOs.CruisePortDto;
 import com.example.demo.View.DTOs.OnboardActivityDTO;
 import com.example.demo.View.DTOs.Payload.Request.CruisePortRequest;
 import com.example.demo.View.DTOs.Payload.Response.PortActivityScheduleResponse;
+import com.example.demo.View.DTOs.UserPortActivityNewDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,5 +157,18 @@ public class Conversion {
             portActivityScheduleResponses.add(new PortActivityScheduleResponse(pas.getId(), pas.getPortActivityId(), start_date_time, pas.getDuration(), pas.getLocation(), pas.getPrice()));
         }
         return portActivityScheduleResponses;
+    }
+
+    public static List<UserPortActivityNewDto> convertToActivitiesDto(List<PortActivitiesSchedule> pas,List<PortActivities>pa)
+    {
+        List<UserPortActivityNewDto> returnList=new ArrayList<>();
+        Integer contor=pas.size();
+        for(int i=0;i<contor;++i)
+        {
+            PortActivitiesSchedule tempPas=pas.get(i);
+            PortActivities tempPa=pa.get(i);
+            returnList.add(new UserPortActivityNewDto(tempPas.getId(),tempPa.getName(),tempPa.getImagePath(),tempPas.getPortActivityId(),tempPas.getStart_date(),tempPas.getStart_time(), tempPas.getDuration(), tempPas.getLocation(), tempPas.getPrice()));
+        }
+        return returnList;
     }
 }

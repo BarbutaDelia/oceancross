@@ -11,10 +11,12 @@ import com.example.demo.Model.Exceptions.Wishlist.UserCruisesNotFound;
 import com.example.demo.Model.Services.CruiseService;
 import com.example.demo.Model.Services.UserPortActivitiesService;
 import com.example.demo.Model.Services.WishlistService;
+import com.example.demo.Model.Util.Conversion;
 import com.example.demo.View.DTOs.Payload.Request.UserPortActivitiesPostDto;
 import com.example.demo.View.DTOs.Payload.Request.UserPortActivitiesPostDtoList;
 import com.example.demo.View.DTOs.Payload.Response.MessageResponse;
 import com.example.demo.View.DTOs.UserPortActivityDto;
+import com.example.demo.View.DTOs.UserPortActivityNewDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -60,9 +62,25 @@ public class UserPortActivitiesController
         }
         //iau activitatile userului curent de pe croaziera curenta din portul curent :)
         List <PortActivitiesSchedule> userPortActivities=userPortActivitiesService.getPortActivityScheduleById(userActivities);
+        List<PortActivities> userActivites=new ArrayList<>();
 
+        for (PortActivitiesSchedule pas:userPortActivities)
+        {
+            userActivites.add(userPortActivitiesService.getPortActivityById(pas.getPortActivityId()));
 
-        UserPortActivityDto userPortActivityDto=new UserPortActivityDto(user_id,cruise_id,port_id,portActivitiesSchedules,userPortActivities);
+        }
+
+        List<PortActivities> allActivites=new ArrayList<>();
+        for (PortActivitiesSchedule pas:portActivitiesSchedules)
+        {
+            allActivites.add(userPortActivitiesService.getPortActivityById(pas.getPortActivityId()));
+
+        }
+
+        List<UserPortActivityNewDto>userPortActivityNewDto= Conversion.convertToActivitiesDto(userPortActivities,userActivites);
+        List<UserPortActivityNewDto>allPortActivitiesNewDto= Conversion.convertToActivitiesDto(portActivitiesSchedules,allActivites);
+
+        UserPortActivityDto userPortActivityDto=new UserPortActivityDto(userPortActivityNewDto,allPortActivitiesNewDto);
 
         return new ResponseEntity<>(userPortActivityDto,HttpStatus.OK);
     }

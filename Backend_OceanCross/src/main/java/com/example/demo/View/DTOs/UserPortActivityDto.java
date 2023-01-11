@@ -1,5 +1,6 @@
 package com.example.demo.View.DTOs;
 
+import com.example.demo.Model.Entities.PortActivities;
 import com.example.demo.Model.Entities.PortActivitiesSchedule;
 import com.example.demo.Model.Entities.UserPortActivities;
 import lombok.AllArgsConstructor;
@@ -15,11 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class UserPortActivityDto
 {
-    Long userID;
-    Long cruiseID;
-    Long portID;
-    List<PortActivitiesSchedule> allPortActivities;
-
-    // defapt aici o sa am tot PortActivitiesSchedule
-    List<PortActivitiesSchedule> userPortActivities;
+   List<UserPortActivityNewDto> userActivities;
+   List<UserPortActivityNewDto> portActivities;
 }
