@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { Title } from '@angular/platform-browser';
 import { PortsService } from 'src/app/ports/services/ports.services';
-import { SnackBarMessageService } from 'src/app/shared/services/snack-bar-message.service';
 import { ICoordonate } from '../models/coordinate.interface';
 
 @Component({

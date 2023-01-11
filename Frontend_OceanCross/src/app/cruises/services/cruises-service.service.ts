@@ -42,4 +42,11 @@ export class CruisesService {
     return this.http.delete(`/api/cruises/${idCruise}/onboardActivities/${idOnboardActivity}`);
   }
   
+  public getPortCruise(idCruise:number,idPort:number ): Observable<any> {
+    const tokenParse = JSON.parse(localStorage.getItem("data"))
+    const headers = new HttpHeaders( {
+        Authorization: `${tokenParse.type} ${tokenParse.token}`,
+    })
+    return this.http.get(`/api/cruises/${idCruise}/port/${idPort}`, {headers});
+  }
 }

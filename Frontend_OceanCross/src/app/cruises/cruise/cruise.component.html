@@ -69,7 +69,7 @@
         </div>
         <div class="button" *ngIf="localStorageService.connectedUser?.username!==''">
             <p class="white"> Price for this cruise: {{cruise?.price}}$</p>
-            <button mat-raised-button  color="warn">Add cruise to wishlist</button> <br><br>
+            <button mat-raised-button  color="warn" (click)="addCruiseToUser()">Add cruise to wishlist</button> <br><br>
         </div>
         
     </div>

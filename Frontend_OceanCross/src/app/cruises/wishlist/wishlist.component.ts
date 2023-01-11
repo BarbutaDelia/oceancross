@@ -1,10 +1,7 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit, Output } from '@angular/core';
-import { TitleStrategy } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
-import { __importDefault } from 'tslib';
 import { ICruise } from '../models/cruise.interface';
-import { CruisesService } from '../services/cruises-service.service';
+import { WishlistService } from '../services/wishlist-service.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -19,10 +16,14 @@ export class WishlistComponent implements OnInit {
   public cruisesPage: number = 1;
   public itemsPerPage: number = 2;
 
-  constructor(private cruisesService:CruisesService, public localStorageService:LocalStorageService ) { }
+  constructor(private wishlistService:WishlistService, public localStorageService:LocalStorageService ) { }
   
   ngOnInit(): void {
-    this.cruisesService.getCruises().subscribe( cruises => {this.cruises = cruises; this.cruisesFilter = cruises })
+    const tokenParse = JSON.parse(localStorage.getItem("data"))
+    if(tokenParse.id !== -1)  {
+       this.wishlistService.getCruises(tokenParse.id)
+       .subscribe( cruises => {this.cruises = cruises; this.cruisesFilter = cruises })
+    }
     
   }
   public set filter(filterBy: string) {

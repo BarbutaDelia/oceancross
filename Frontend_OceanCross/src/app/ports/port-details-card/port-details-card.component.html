@@ -1,13 +1,12 @@
 <div class = "activity-card">
-    <img class= "port-image" [src]= "portActivity.imagePath">
+    <img class= "port-image" src="{{addImage(portActivity)}}">
     <div class = "activity-card-details">
         <span> Activity name: {{portActivity.name}}</span>
-        <p>Location: {{portActivitySchedule.location}}</p>
-        <p>Duration: {{portActivitySchedule.duration}}</p>
-        <p>StartTime: {{portActivitySchedule.startTime.hours}} h {{portActivitySchedule.startTime.minutes}} min</p>
-        <p>StartDate: {{portActivitySchedule.startDate}}</p>
-        <p>Price: {{portActivitySchedule.price}}</p>
+        <p>Location: {{portActivity.location}}</p>
+        <p>Duration: {{portActivity.duration}}</p>
+        <p>StartTime: {{portActivity.start_time}}</p>
+        <p>StartDate: {{portActivity.start_date}}</p>
+        <p>Price: {{portActivity.price}}</p>
     </div>
-    
 </div>
 

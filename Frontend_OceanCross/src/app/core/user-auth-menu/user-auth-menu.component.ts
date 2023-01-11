@@ -18,10 +18,11 @@ export class UserAuthMenuComponent implements OnInit {
     const dataStorage:ILoginInfo = {
       token: '',
       type: '',
-      id: 0,
+      id: -1,
       username: '',
       role: ''
     }
+    
     localStorage.setItem("data", JSON.stringify(dataStorage))
     this.localStorageService.changeData(JSON.parse(localStorage.getItem("data")))
     this.router.navigateByUrl('/');

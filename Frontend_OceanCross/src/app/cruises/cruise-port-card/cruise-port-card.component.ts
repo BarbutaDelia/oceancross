@@ -12,9 +12,8 @@ export class CruisePortCardComponent implements OnInit {
   constructor(private router:Router) { }
   @Input() cruise:ICruise;
   ngOnInit(): void { }
-  viewActivities(id:String):void
-  {
-    this.router.navigateByUrl('/port-activities/'+id);
+  private async viewActivities(id:String) {
+    await this.router.navigate(['/port-activities/'+id, {data: JSON.stringify([this.cruise.id, id])}]);
   }
 
 }

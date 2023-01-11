@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPortActivitySchedule } from '../interfaces/port-activity-schedule';
-import { IPortActivity } from '../interfaces/port-activity.interface';
+import { IPortActivity } from 'src/app/cruises/models/portActivities.interface';
 
 @Component({
   selector: 'app-port-details-card',
@@ -10,10 +9,13 @@ import { IPortActivity } from '../interfaces/port-activity.interface';
 export class PortDetailsCardComponent implements OnInit {
 
   @Input() public portActivity: IPortActivity;
-  @Input() public portActivitySchedule : IPortActivitySchedule;
   
   constructor() { }
 
   ngOnInit(): void { }
+  
+   public addImage(activity:IPortActivity):string {
+      return "http://localhost:8080/" + activity.image
+   } 
 
 }

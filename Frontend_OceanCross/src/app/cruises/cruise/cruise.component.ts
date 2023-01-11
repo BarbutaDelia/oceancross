@@ -3,8 +3,11 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ICruise } from '../models/cruise.interface';
 import { CruisesService } from '../services/cruises-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { WishlistService } from '../services/wishlist-service.service';
+import { IWishListPostDto } from '../models/wishlistPostDto.interface';
+import { SnackBarMessageService } from 'src/app/shared/services/snack-bar-message.service';
 
 @Component({
   selector: 'app-cruise',
@@ -25,9 +28,16 @@ export class CruiseComponent implements OnInit {
   @ViewChild('TableActivities') TableActivities = new MatSort();
   @ViewChild('TablePorts') TablePorts = new MatSort();
 
-  constructor(private activatedRoute: ActivatedRoute, private cruisesService:CruisesService, public localStorageService:LocalStorageService ) {}
+  constructor(
+    private activatedRoute: ActivatedRoute, 
+    private cruisesService:CruisesService, 
+    public localStorageService:LocalStorageService,
+    private wishlistService: WishlistService,
+    private snackBarMessageService:SnackBarMessageService,
+    private router: Router
+    ) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.cruiseID = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.cruisesService.getCruise(this.cruiseID).subscribe( cruise => {
       this.cruise = cruise;
@@ -36,9 +46,29 @@ export class CruiseComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit() {    
+  public ngAfterViewInit() {    
     this.dataSourceActivities.sort = this.TableActivities;
     this.dataSourcePorts.sort = this.TablePorts;
+  }
+
+  public addCruiseToUser(){
+    const tokenParse = JSON.parse(localStorage.getItem("data"))
+    const wishlistRequest : IWishListPostDto = {
+      userId: tokenParse.id,
+      cruiseId:this.cruiseID,
+    }
+    this.wishlistService.addCruiseToWishlist(wishlistRequest)
+    .subscribe(
+      data => {
+        this.snackBarMessageService.openSnackBar( data.message)
+        this.router.navigateByUrl("/")
+      },
+      error =>{
+        this.snackBarMessageService.openSnackBar("Error: The cruise is already in wishlist")
+        this.router.navigateByUrl("/")
+
+      }
+    )
   }
 
 }

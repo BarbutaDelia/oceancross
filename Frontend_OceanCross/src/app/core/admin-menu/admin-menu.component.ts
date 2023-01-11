@@ -18,7 +18,7 @@ export class AdminMenuComponent implements OnInit {
     const dataStorage:ILoginInfo = {
       token: '',
       type: '',
-      id: 0,
+      id: -1,
       username: '',
       role: ''
     }

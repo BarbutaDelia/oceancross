@@ -102,7 +102,6 @@ export class AddCruiseComponent implements OnInit {
   }
 
   public updateCruise(){
-    console.log(this.cruise)
     if(this.checkFirstForm()) {
       const cruiseRequest :ICruiseRequest = {
         id: this.cruiseID,
