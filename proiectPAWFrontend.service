@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=ubuntu
 Type=simple
-ExecStart=/home/ubuntu/PAW/script_front.sh start
-ExecStop=/home/ubuntu/PAW/script_front.sh stop
+ExecStart=/home/ubuntu/PAW/proiect-paw-tadam/script_front.sh start
+ExecStop=/home/ubuntu/PAW/proiect-paw-tadam/script_front.sh stop
 Restart=always
 
 StandardOutput=file:/home/ubuntu/PAW/logs/frontend_service.log
