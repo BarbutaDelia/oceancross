@@ -8,15 +8,16 @@ git fetch
 if [[ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]]; then
   # Stop the two systemd services
   sudo systemctl stop proiectPAWBackend.service
-  #systemctl stop proiectPAWFrontend.service
+  sudo systemctl stop proiectPAWFrontend.service
 
   # Perform pull and get the latest code
   git pull
 
   # Execute permission over script
   chmod +x script.sh
+  chmod +x script_front.sh
 
   # Start the two systemd services again
   sudo systemctl start proiectPAWBackend.service
-  #systemctl start proiectPAWFrontend.service
+  sudo systemctl start proiectPAWFrontend.service
 fi

@@ -4,10 +4,10 @@ After=multi-user.target
 
 [Service]
 Type=idle
-ExecStart=java -jar /home/ubuntu/PAW/demo.jar > /home/ubuntu/PAW/logs.log
+ExecStart=java -jar /home/ubuntu/PAW/proiect-paw-tadam/Backend_OceanCross/out/artifacts/demo_jar/demo.jar
 Restart=always
-StandardOutput=file:/home/ubuntu/PAW/my_service.log
-StandardError=file:/home/ubuntu/PAW/my_service.log
+StandardOutput=file:/home/ubuntu/PAW/logs/backend_service.log
+StandardError=file:/home/ubuntu/PAW/logs/backend_service.log
 
 [Install]
 WantedBy=multi-user.target

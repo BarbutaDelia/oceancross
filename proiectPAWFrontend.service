@@ -3,10 +3,11 @@ Description=My Angular App
 After=network.target
 
 [Service]
+User=ubuntu
 Type=simple
 ExecStart=/home/ubuntu/PAW/script_front.sh start
 ExecStop=/home/ubuntu/PAW/script_front.sh stop
-Restart=on-failure
+Restart=always
 
 StandardOutput=file:/home/ubuntu/PAW/logs/frontend_service.log
 StandardError=file:/home/ubuntu/PAW/logs/frontend_service.log

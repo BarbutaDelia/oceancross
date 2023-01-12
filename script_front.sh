@@ -13,7 +13,7 @@ stop() {
    then
        echo "Service is not running."
    else
-       kill $pid
+       kill -9 $pid
    fi
 }
 

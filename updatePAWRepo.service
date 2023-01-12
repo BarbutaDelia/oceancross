@@ -1,14 +1,14 @@
 [Unit]
-Description=Update service
+Description=Update PAW repo service
 
 [Service]
+User=ubuntu
 Type=simple
 ExecStart=/home/ubuntu/PAW/proiect-paw-tadam/script.sh
-#[Timer]
-#OnUnitActiveSec=1h
-
-[Install]
-WantedBy=timers.target
+Restart=on-failure
+StandardOutput=file:/home/ubuntu/PAW/logs/my_update_service.log
+StandardError=file:/home/ubuntu/PAW/logs/my_update_service.log
 
 [Install]
 WantedBy=multi-user.target
+
