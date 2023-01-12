@@ -6,7 +6,8 @@ p{
     display: flex;
     text-align: center;
     flex-direction: row;
-    background-color: bisque
+    background-color: bisque;
+    width:100%;
 }
 .port-image {
     width: 200px;
@@ -15,3 +16,7 @@ p{
 .activity-card-details{
     text-align: center;
 }
+::ng-deep  .example-box {
+    background-color: #619ac7 !important; 
+}
+

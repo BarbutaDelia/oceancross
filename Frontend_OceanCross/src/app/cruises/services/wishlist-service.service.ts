@@ -9,7 +9,11 @@ export class WishlistService {
   constructor(private http: HttpClient) { }
 
   public getCruises(user_id: number): Observable<any> {
-    return this.http.get(`/api/wishlist/${user_id}`);
+    const tokenParse = JSON.parse(localStorage.getItem("data"))
+    const headers = new HttpHeaders( {
+        Authorization: `${tokenParse.type} ${tokenParse.token}`,
+    })
+    return this.http.get(`/api/wishlist/${user_id}`,  {headers});
   }
 
   public addCruiseToWishlist(cruiseRequest: IWishListPostDto): Observable<any> {
