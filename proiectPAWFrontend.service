@@ -1,0 +1,15 @@
+[Unit]
+Description=My Angular App
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/PAW/script_front.sh start
+ExecStop=/home/ubuntu/PAW/script_front.sh stop
+Restart=on-failure
+
+StandardOutput=file:/home/ubuntu/PAW/logs/frontend_service.log
+StandardError=file:/home/ubuntu/PAW/logs/frontend_service.log
+
+[Install]
+WantedBy=multi-user.target
